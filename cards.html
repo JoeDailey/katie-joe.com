@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/cards.js" async defer></script>
+    <style>
+        body {
+            display: flex;
+            justify-items: center;
+        }
+
+        .stack {
+            height: 7.7in;
+        }
+
+        .stack > .card {
+            position: absolute;
+        }
+
+        .stack > .card:nth-child(1) {
+            display: inline;
+            transform: rotateX(5deg)
+        }
+
+        .stack > .card:nth-child(2) {
+            display: inline;
+            transform: rotateX(-7deg)
+        }
+
+        .stack > .card:nth-child(3) {
+            display: inline;
+            transform: rotateX(11deg)
+        }
+
+        .stack > .card:nth-child(4) {
+            display: inline;
+            transform: rotateX(13deg)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stack">
+        <img class="card back" id="back-destination" src="cards/back-destination.png" />
+        <img class="card back" id="back-moment" src="cards/back-moment.png" />
+        <img class="card back" id="back-wildcard" src="cards/back-wildcard.png" />
+    </div>
+    <div class="stack">
+        <img class="card face" id="face-destination-10" data-back="back-destination" src="cards/face-destination-10.png" />
+        <img class="card face" id="face-destination-11" data-back="back-destination" src="cards/face-destination-11.png" />
+        <img class="card face" id="face-destination-12" data-back="back-destination" src="cards/face-destination-12.png" />
+        <img class="card face" id="face-destination-13" data-back="back-destination" src="cards/face-destination-13.png" />
+        <img class="card face" id="face-destination-14" data-back="back-destination" src="cards/face-destination-14.png" />
+        <img class="card face" id="face-destination-15" data-back="back-destination" src="cards/face-destination-15.png" />
+        <img class="card face" id="face-destination-16" data-back="back-destination" src="cards/face-destination-16.png" />
+        <img class="card face" id="face-destination-17" data-back="back-destination" src="cards/face-destination-17.png" />
+        <img class="card face" id="face-moment-1" data-back="back-moment" src="cards/face-moment-1.png" />
+        <img class="card face" id="face-moment-2" data-back="back-moment" src="cards/face-moment-2.png" />
+        <img class="card face" id="face-moment-3" data-back="back-moment" src="cards/face-moment-3.png" />
+        <img class="card face" id="face-moment-4" data-back="back-moment" src="cards/face-moment-4.png" />
+        <img class="card face" id="face-moment-5" data-back="back-moment" src="cards/face-moment-5.png" />
+        <img class="card face" id="face-moment-6" data-back="back-moment" src="cards/face-moment-6.png" />
+        <img class="card face" id="face-moment-7" data-back="back-moment" src="cards/face-moment-7.png" />
+        <img class="card face" id="face-moment-8" data-back="back-moment" src="cards/face-moment-8.png" />
+        <img class="card face" id="face-moment-9" data-back="back-moment" src="cards/face-moment-9.png" />
+        <img class="card face" id="face-wildcard-18" data-back="back-wildcard" src="cards/face-wildcard-18.png" />
+    </div>
+</html>
