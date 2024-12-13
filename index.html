@@ -42,46 +42,51 @@
         * {
             box-sizing: border-box;
             font-family: Glazed-Donuts, Helvetica Sans-serif;
+            overscroll-behavior: none;
         }
 
         body {
+            height: 100vh;
+            width: 100vw;
             margin: 0;
             background-image: linear-gradient(40deg, var(--coral) 00%, var(--ctg-1) 15%, var(--ctg-2) 20%, var(--teal) 30%);
+            overflow: hidden;
         }
 
         .container {
             scroll-snap-type: y mandatory;
-            width: 100vw;
             height: 100vh;
+            width: 100vw;
             overflow: scroll;
             display: grid;
-            grid-template-columns: 61.8% auto;
             scroll-behavior: smooth;
         }
 
         section {
             height: 100vh;
+            height: 90vh;
             scroll-snap-align: start;
             text-align: center;
             position: relative;
         }
 
+        .hidden {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
 
-        @media screen and (max-width: 800px) {
+        @media screen and (min-width: 800px) {
             .container {
-                grid-template-columns: 100%;
+                grid-template-columns: 61.8% auto;
             }
+
             section {
-                height: 90vh;
-            }
-            #cover>div {
-                position: static!important;
+                height: 100vh;
             }
         }
     </style>
     <style>
         #cover>img {
-            float: left;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -97,25 +102,39 @@
         }
 
         #cover>div {
-            position: fixed;
-            bottom: 0;
+            position: absolute;
             top: 0;
+            width: 100%;
             padding: .5em 1em;
 
-            font-size: 4em;
+            font-size: 2em;
+            text-align: center;
             background: var(--gradient);
             color: transparent;
             background-clip: text;
         }
 
+        @media screen and (min-width: 800px) {
+            #cover>div {
+                position: fixed;
+                top: 0;
+                width: unset;
+                font-size: 4em;
+                text-align: unset;
+            }
+        }
+    </style>
+    <style>
         #countdown {
             display: flex;
-            gap: 2px;
+            flex-wrap: wrap;
+            column-gap: 2px;
+            row-gap: 6px;
             align-items: baseline;
             justify-content: center;
-            position: fixed;
+
+            position: absolute;
             bottom: 0;
-            width: 61.8%;
 
             transition: visibility 0.1s, transform .8s, opacity 1s linear;
             visibility: visible;
@@ -153,6 +172,11 @@
             font-weight: 100;
         }
 
+        #countdown>.flex-break {
+            flex-basis: 100%;
+            width: 0;
+        }
+
         #countdown>.tick {
             animation: tick 1s;
         }
@@ -163,27 +187,36 @@
             }
         }
 
-        .hidden {
-            visibility: hidden !important;
-            opacity: 0 !important;
+        @media screen and (min-width: 800px) {
+
+
+            #countdown>.flex-break {
+                display: none;
+            }
+
+            #countdown {
+                flex-wrap: nowrap;
+                position: fixed;
+                bottom: 0;
+                width: 61.8%;
+            }
         }
     </style>
     <style>
         #welcome {
             background-color: var(--corn);
+            padding: 5%;
         }
 
         #welcome>.inset {
             z-index: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
 
-            width: 60%;
-            height: 80%;
-            min-width: 22ch;
-            margin-top: 15%;
-            margin-left: auto;
-            margin-right: auto;
-
-            padding-top: 12%;
+            padding-top: 0.8em;
 
             border-style: solid;
             border-bottom: 0;
@@ -193,19 +226,21 @@
 
         #welcome h1 {
             font-size: 4em;
+            margin: 0;
         }
 
         #welcome h2 {
             font-size: 2em;
+            margin: 0;
         }
 
         #rsvp {
             z-index: 0;
             display: inline-block;
-            margin-top: 3em;
-            margin-bottom: 2em;
             font-size: 3em;
             text-decoration: none;
+            flex-grow: 0;
+            align-self: center;
 
             letter-spacing: .2em;
             padding: .2em .2em .2em .4em;
@@ -259,14 +294,14 @@
 
         }
 
-        #welcome>a {
+        #welcome .next {
             font-size: 2.2em;
             text-decoration: none;
             color: black;
             position: relative;
         }
 
-        #welcome>a::after {
+        #welcome .next::after {
             content: "";
             border-right: solid black 2px;
             border-bottom: solid black 2px;
@@ -280,12 +315,21 @@
             transition: bottom .14s ease-in;
         }
 
-        #welcome>a:hover::after {
+        #welcome .next:hover::after {
             bottom: -26px;
         }
 
         #info {
             background-color: var(--corn);
+        }
+
+        @media screen and (min-width: 800px) {
+            #welcome {
+                padding: 10%;
+            }
+            #welcome>.insert {
+                padding: 10%;
+            }
         }
     </style>
 </head>
@@ -306,6 +350,7 @@
                 <span class="digit" hour="0"></span>
                 <span class="digit" hour="1"></span>
                 <span class="sep">Hours</span>
+                <div class="flex-break"></div>
                 <span class="digit" min="0"></span>
                 <span class="digit" min="1"></span>
                 <span class="sep">Minutes</span>
@@ -323,8 +368,8 @@
                     We met, it was hot. Now we are making a promise to the state of california that we are monogamous.
                     Typical gov't getting in your business amiright.
                 </p>
+                <a class="next" href="#info">View Details</a>
             </div>
-            <a href="#info">View Details</a>
         </section>
         <section id="game"></section>
         <section id="info"></section>
