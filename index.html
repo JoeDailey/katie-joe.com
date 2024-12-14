@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://livejs.com/live.js"></script>
+    <title>Katie and Joe's Wedding</title>
     <style>
         :root {
             --coral: #faa197;
@@ -12,9 +12,13 @@
             --ctg-2: #d8c2de;
             --teal: #61b3b5;
             --corn: #faf5ddff;
-            --gradient: linear-gradient(40deg, var(--coral) 0%, var(--ctg-1) 27%, var(--ctg-2) 57%, var(--teal) 100%);
+            --bg-size: 100vw 100vh;
+            --bg-gradient: radial-gradient(farthest-corner at 80% 45%,
+                    var(--teal) 30%,
+                    var(--ctg-2) 60%,
+                    var(--ctg-1) 70%,
+                    var(--coral) 100%);
         }
-
 
         @font-face {
             font-family: Attaction;
@@ -39,6 +43,11 @@
             font-weight: bold;
         }
 
+        @font-face {
+            font-family: Shantel-Sans;
+            src: url("asset/ShantellSans-Regular.ttf");
+        }
+
         * {
             box-sizing: border-box;
             font-family: Glazed-Donuts, Helvetica Sans-serif;
@@ -49,7 +58,6 @@
             height: 100vh;
             width: 100vw;
             margin: 0;
-            background-image: linear-gradient(40deg, var(--coral) 00%, var(--ctg-1) 15%, var(--ctg-2) 20%, var(--teal) 30%);
             overflow: hidden;
         }
 
@@ -63,11 +71,32 @@
         }
 
         section {
-            height: 100vh;
+            text-align: left;
+            padding: 5%;
             height: 90vh;
             scroll-snap-align: start;
-            text-align: center;
             position: relative;
+            background-color: var(--corn);
+        }
+
+        section h1 {
+
+        }
+
+        section h3 {
+            margin: 0;
+            /* font-size: 2em; */
+        }
+
+        section p {
+            margin: 0;
+            /* font-size: 1.2em; */
+        }
+
+        section a {
+            text-decoration: none;
+            color: transparent;
+            background-clip: text;
         }
 
         .hidden {
@@ -75,7 +104,22 @@
             opacity: 0 !important;
         }
 
+        .gradient-clip {
+            background-attachment: fixed;
+                background-size: var(--bg-size);
+                background-image: var(--bg-gradient);
+        }
+
         @media screen and (min-width: 800px) {
+            :root {
+                --bg-size: 100vw 110vh;
+                --bg-gradient: radial-gradient(farthest-corner at 50% 50%,
+                        var(--teal) 50%,
+                        var(--ctg-2) 65%,
+                        var(--ctg-1) 70%,
+                        var(--coral) 80%);
+            }
+
             .container {
                 grid-template-columns: 61.8% auto;
             }
@@ -86,6 +130,9 @@
         }
     </style>
     <style>
+        #cover {
+            padding: 0;
+        }
         #cover>img {
             width: 100%;
             height: 100%;
@@ -93,12 +140,16 @@
             overflow: hidden;
         }
 
-        #cover h1 {
-            background: var(--gradient);
+        #cover h1,
+        #cover p {
             color: transparent;
-            font-family: attaction, cursive;
             background-clip: text;
+        }
+
+        #cover h1 {
+            font-family: attaction, cursive;
             margin: 0;
+            font-size: 2em;
         }
 
         #cover>div {
@@ -107,9 +158,8 @@
             width: 100%;
             padding: .5em 1em;
 
-            font-size: 2em;
+            font-size: 1.8em;
             text-align: center;
-            background: var(--gradient);
             color: transparent;
             background-clip: text;
         }
@@ -121,6 +171,22 @@
                 width: unset;
                 font-size: 4em;
                 text-align: unset;
+            }
+
+            #title {
+                transition: color .3s ease-in;
+            }
+
+            #title.scrolled {
+                color: var(--corn);
+            }
+
+            #subtitle {
+                transition: visibility .1s ease-in;
+            }
+
+            #subtitle.scrolled {
+                visibility: hidden;
             }
         }
     </style>
@@ -136,13 +202,15 @@
             position: absolute;
             bottom: 0;
 
-            transition: visibility 0.1s, transform .8s, opacity 1s linear;
+            transition: visibility 0.1s ease-in, opacity .8s ease-in;
             visibility: visible;
             opacity: 1;
         }
 
-        #countdown.hidden {
-            transform: translateY(4em);
+
+        #countdown.hidden>.digit {
+            background-size: 150% 95%;
+
         }
 
         #countdown>.digit,
@@ -150,24 +218,19 @@
             font-family: Glazed-Donuts, Helvetica Sans-serif;
             flex-shrink: 0;
             flex-grow: 0;
+            color: var(--corn);
         }
 
         #countdown>.digit {
-            background-image: linear-gradient(40deg, var(--coral) 00%, var(--ctg-1) 15%, var(--ctg-2) 20%, var(--teal) 30%);
-            background-position: center;
-            background-size: contain;
-            background-attachment: fixed;
-
             width: 3rem;
             font-size: 2em;
             border-radius: 5px;
             text-align: center;
             vertical-align: middle;
-            color: white;
+            transition: background-size 1.5s ease-in;
         }
 
         #countdown>.sep {
-            color: white;
             margin-right: 1ch;
             font-weight: 100;
         }
@@ -183,13 +246,11 @@
 
         @keyframes tick {
             20% {
-                background-position: +100px;
+                background-size: 150% 95%;
             }
         }
 
         @media screen and (min-width: 800px) {
-
-
             #countdown>.flex-break {
                 display: none;
             }
@@ -200,15 +261,28 @@
                 bottom: 0;
                 width: 61.8%;
             }
+
+            @keyframes tick {
+                20% {
+                    background-size: 180vw 114vh;
+                }
+            }
         }
     </style>
     <style>
         #welcome {
+            text-align: center;
             background-color: var(--corn);
             padding: 5%;
         }
 
-        #welcome>.inset {
+        #welcome .background {
+            padding: 4px 4px 0 4px;
+            height: 100%;
+            width: 100%;
+        }
+
+        #welcome .inset {
             z-index: 0;
             height: 100%;
             width: 100%;
@@ -217,15 +291,11 @@
             justify-content: space-evenly;
 
             padding-top: 0.8em;
-
-            border-style: solid;
-            border-bottom: 0;
-            border-image-slice: 1;
-            border-image-source: var(--gradient);
+            background-color: var(--corn);
         }
 
         #welcome h1 {
-            font-size: 4em;
+            font-size: 3em;
             margin: 0;
         }
 
@@ -238,64 +308,57 @@
             z-index: 0;
             display: inline-block;
             font-size: 3em;
-            text-decoration: none;
             flex-grow: 0;
             align-self: center;
+            text-decoration: none;
 
             letter-spacing: .2em;
-            padding: .2em .2em .2em .4em;
+            padding: 4px;
             position: relative;
 
-            background: var(--gradient);
+            transition: background-size .4s linear;
+            background-clip: unset;
+            /* font-family: 'Glazed-Donut'; */
+            color: unset;
+        }
+
+        #rsvp>span {
+            background: var(--corn);
+            padding: 0 .2em 0 .4em;
+            transition: background .2s ease-in;
+        }
+
+        #rsvp>span>span {
             color: transparent;
             background-clip: text;
-
-            border: solid var(--teal) 4px;
-
-            border-image-slice: 1;
-            border-image-source: var(--gradient);
-
-            transition: background 1s ease;
+            transition: color .2s ease-in;
         }
 
         #rsvp:hover {
-            background-clip: none;
+            background-size: 88vw 70vh !important;
+        }
+
+        #rsvp:hover>span {
+            background: none;
+        }
+
+        #rsvp:hover>span>span {
             color: var(--corn);
-            font-weight: bolder;
-        }
-
-        #rsvp::after {
-            z-index: -1;
-            content: "";
-            background: green;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: var(--gradient);
-            background-size: 300% auto;
-            transition: opacity .2s ease-out, background-size .3s ease-in;
-            opacity: 0;
-        }
-
-        #rsvp:hover::after {
-            opacity: 1;
-            background-size: 100% auto;
-            background-position-x: center;
+            background: none;
         }
 
         #welcome p {
-            font-size: 2em;
-            margin: 0 10%;
-            padding: 20px;
+            font-family: 'Shantel-Sans';
+            font-size: 1em;
+            margin: 0 5%;
+            padding: .6em 0;
             border-top: black solid 1px;
             border-bottom: black solid 1px;
-
+            font-weight: 100;
         }
 
         #welcome .next {
-            font-size: 2.2em;
+            font-size: 1.2em;
             text-decoration: none;
             color: black;
             position: relative;
@@ -319,78 +382,188 @@
             bottom: -26px;
         }
 
-        #info {
-            background-color: var(--corn);
-        }
-
         @media screen and (min-width: 800px) {
             #welcome {
                 padding: 10%;
             }
+
             #welcome>.insert {
                 padding: 10%;
             }
+
+            #welcome p {
+                font-size: 1.4em;
+                margin: 0 5%;
+                padding: 1em 0;
+            }
+        }
+    </style>
+
+    <style>
+        #game {
+            background: none;
         }
     </style>
 </head>
 
-<body>
+<body class="gradient-clip">
     <div class="container">
         <section id="cover">
             <img src="asset/cover.jpg" alt="Cover">
             <div>
-                <h1>Katie andJoe</h1>
-                <p>Join us at our wedding </p>
+                <h1 id="title" class="gradient-clip">Katie andJoe</h1>
+                <p id="subtitle" class="gradient-clip">Join us at our wedding </p>
             </div>
             <h2 id="countdown" class="hidden">
-                <span class="digit" day="0"></span>
-                <span class="digit" day="1"></span>
-                <span class="digit" day="2"></span>
+                <span class="digit gradient-clip" day="0">&nbsp;</span>
+                <span class="digit gradient-clip" day="1">&nbsp;</span>
+                <span class="digit gradient-clip" day="2">&nbsp;</span>
                 <span class="sep">Days</span>
-                <span class="digit" hour="0"></span>
-                <span class="digit" hour="1"></span>
+                <span class="digit gradient-clip" hour="0">&nbsp;</span>
+                <span class="digit gradient-clip" hour="1">&nbsp;</span>
                 <span class="sep">Hours</span>
                 <div class="flex-break"></div>
-                <span class="digit" min="0"></span>
-                <span class="digit" min="1"></span>
+                <span class="digit gradient-clip" min="0">&nbsp;</span>
+                <span class="digit gradient-clip" min="1">&nbsp;</span>
                 <span class="sep">Minutes</span>
-                <span class="digit" sec="0"></span>
-                <span class="digit" sec="1"></span>
+                <span class="digit gradient-clip" sec="0">&nbsp;</span>
+                <span class="digit gradient-clip" sec="1">&nbsp;</span>
                 <span class="sep">Seconds</span>
             </h2>
         </section>
         <section id="welcome">
-            <div class="inset">
-                <h1>La Jolla, California</h1>
-                <h2>Saturday, May 17, 2025</h2>
-                <a id="rsvp" href="https://withjoy.com/joe-and-katie-may-25/rsvp" target="_blank">RSVP</a>
-                <p>
-                    We met, it was hot. Now we are making a promise to the state of california that we are monogamous.
-                    Typical gov't getting in your business amiright.
-                </p>
-                <a class="next" href="#info">View Details</a>
+            <div class="background gradient-clip">
+                <div class="inset">
+                    <div>
+                        <h1>La Jolla, California</h1>
+                        <h2>Saturday, May 17, 2025</h2>
+                    </div>
+                    <a id="rsvp" class="gradient-clip" href="https://withjoy.com/joe-and-katie-may-25/rsvp"
+                        target="_blank">
+                        <span>
+                            <span class="gradient-clip">
+                                RSVP
+                            </span>
+                        </span>
+                    </a>
+                    <p>
+                        Our love story began in Seattle in the summer of 2018 when Katie, a bright-eyed intern, joined
+                        my team. It didn’t take long to realize there was more than just workplace synergy between us.
+                        After Katie returned to college and later moved to San Francisco for work, it seemed like we
+                        might never reconnect. But in 2020, with the pandemic and remote work changing everything, Katie
+                        made the bold decision to move to Seattle to be with me. Since then, we’ve survived the
+                        pandemic, gotten a puppy, traveled to new places, and moved to Houston. Now, we’re excited to
+                        start the next chapter of our lives together!
+                    </p>
+                    <a class="next" href="#info">View Event Details and More</a>
+                </div>
             </div>
         </section>
+        <section id="info">
+            <h2>Event Schedule</h2>
+            <div class="schedule">
+                <div class="time gradient-clip">4:00</div>
+                <div class="block gradient-clip">
+                    <h3>Ceremony</h3>
+                    <p><a class="gradient-clip"
+                            href="https://www.google.com/maps/place/The+Wedding+Bowl/@32.8441643,-117.2817798,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03435d0ba36d:0x51bd66d95ca99684!8m2!3d32.8441598!4d-117.2792049!16s%2Fg%2F11n7n8jjc_?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">The
+                            Wedding Bowl / Cuvier Park</a></p>
+                </div>
+                <div class="time gradient-clip">4:30</div>
+                <div class="block gradient-clip">
+                    <h3>Cocktail Hour</h3>
+                    <p><a class="gradient-clip"
+                            href="https://www.google.com/maps/place/Cuvier+Club+by+Wedgewood+Weddings/@32.8441955,-117.2792809,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03e52a93be8f:0x61b40b925e731938!8m2!3d32.844191!4d-117.276706!16s%2Fg%2F1vtzhhtk?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Cuvier
+                            Club (5 minute walk)</a></p>
+                </div>
+                <div class="time gradient-clip">5:30</div>
+                <div class="block gradient-clip">
+                    <h3>Dinner, Music, Open Bar</h3>
+                </div>
+                <div class="time gradient-clip">10:00</div>
+            </div>
+            <style>
+            </style>
+            <style>
+                .schedule {
+                    text-align: left;
+                }
+
+                .schedule>.time {
+                    font-family: 'Sauced-Tomato';
+                    color: transparent;
+                    background-clip: text;
+                }
+
+                .schedule>.block {
+                    z-index: 0;
+                    display: inline-block;
+                    margin-left: 1em;
+                    position: relative;
+                    overflow: visible;
+                    padding-left: calc(1em + 4px);
+                }
+
+                .schedule>.block:after {
+                    content: "";
+                    z-index: -1;
+                    position: absolute;
+                    margin-left: 4px;
+                    left: 0;
+                    top: 0;
+                    width: calc(100% - 4px);
+                    height: 100%;
+                    background: var(--corn);
+                }
+            </style>
+        </section>
         <section id="game"></section>
-        <section id="info"></section>
     </div>
 </body>
 
 <script>
+    function trackScroll() {
+        const title = document.getElementById('title');
+        const subtitle = document.getElementById('subtitle');
+        let frame;
+        document.querySelector('.container').addEventListener('scroll', params => {
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => {
+                if (params.target.scrollTop >= window.innerHeight / 4) {
+                    title.classList.add('scrolled');
+                    subtitle.classList.add('scrolled');
+                } else {
+                    title.classList.remove('scrolled');
+                    subtitle.classList.remove('scrolled');
+                }
+            });
+        }, { passive: true });
+    }
+
+    trackScroll();
+</script>
+
+<script>
     const countdown = document.getElementById('countdown');
+    const till = new Date("May 17, 2025 16:00:00").getTime();
+    function getTimeRemaining() {
+        const now = new Date().getTime();
+        return till - now;
+    }
+
     const unit = {
         days: [document.querySelector('.digit[day="0"]'), document.querySelector('.digit[day="1"]'), document.querySelector('.digit[day="2"]')],
         hours: [document.querySelector('.digit[hour="0"]'), document.querySelector('.digit[hour="1"]')],
         minutes: [document.querySelector('.digit[min="0"]'), document.querySelector('.digit[min="1"]')],
         seconds: [document.querySelector('.digit[sec="0"]'), document.querySelector('.digit[sec="1"]')],
     };
+
     function apply(time, part) {
         const digits = String(time).padStart(part.length, "0").split('');
         let visible = false;
         for (let i = 0; i < digits.length; i++) {
             if (visible || digits[i] !== '0') {
                 visible = true;
-                part[i].classList.remove('hidden');
             }
             if (part[i].innerHTML === digits[i]) {
                 continue;
@@ -401,22 +574,27 @@
             setTimeout(() => part[i].classList.remove('tick'), 800);
         }
     }
-    const till = new Date("May 17, 2025 16:00:00").getTime();
-    const tick = setInterval(() => {
-        const now = new Date().getTime();
-        const remainder = till - now;
-        if (remainder <= 0) {
-            clearInterval(tick);
-            counter.remove();
-        } else {
-            countdown.classList.remove('hidden');
-        }
 
+    const tick = setInterval(() => {
+        const remainder = getTimeRemaining();
         apply(Math.floor(remainder / (1000 * 60 * 60 * 24)), unit.days);
         apply(Math.floor((remainder % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), unit.hours);
         apply(Math.floor((remainder % (1000 * 60 * 60)) / (1000 * 60)), unit.minutes);
         apply(Math.floor((remainder % (1000 * 60)) / 1000), unit.seconds);
     }, 200);
+
+    setTimeout(() => {
+        if (getTimeRemaining() <= 0) {
+            clearInterval(tick);
+            countdown.remove();
+            return;
+        }
+
+        countdown.classList.remove('hidden');
+        setTimeout(() => {
+
+        }, 1000);
+    }, 1000);
 </script>
 
 </html>
