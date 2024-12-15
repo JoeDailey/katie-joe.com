@@ -25,7 +25,6 @@
             src: url("asset/attraction.ttf");
         }
 
-
         @font-face {
             font-family: Glazed-Donuts;
             src: url("asset/glazed-donuts.otf") format("opentype");
@@ -77,26 +76,79 @@
             scroll-snap-align: start;
             position: relative;
             background-color: var(--corn);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        section>* {
+            margin-top: 0;
+            margin-bottom: auto;
         }
 
         section h1 {
+            margin: 0;
+            font-size: 2.8em;
+        }
 
+        section h2 {
+            margin: .3em 0 0 0;
+            font-size: 1.8em;
         }
 
         section h3 {
-            margin: 0;
-            /* font-size: 2em; */
+            margin: .2em 0 0 0;
+            font-size: 1.8em;
         }
 
         section p {
-            margin: 0;
-            /* font-size: 1.2em; */
+            margin: .2em 0;
+            font-size: 1em;
+            font-family: 'Shantel-Sans';
         }
 
         section a {
-            text-decoration: none;
+            font-family: inherit;
+            /* text-decoration: none; */
             color: transparent;
             background-clip: text;
+            background-attachment: fixed;
+            background-size: var(--bg-size);
+            background-image: var(--bg-gradient);
+        }
+
+        .next {
+            margin-top: 1em;
+            display: block;
+            text-align: center;
+            font-size: 1.4em;
+            text-decoration: none;
+            color: black;
+            position: relative;
+            background-clip: text;
+            background-attachment: fixed;
+            background-size: var(--bg-size);
+            background-image: var(--bg-gradient);
+            color: transparent;
+        }
+
+        .next::after {
+            content: "";
+            position: absolute;
+            bottom: -1em;
+            width: 5em;
+            height: .8em;
+            left: calc(50% - 2.5em);
+            transition: bottom .14s ease-in;
+            /* clip-path: polygon(0 0, 50% 0%, 100% 0, 60% 30%, 50% 100%, 40% 30%); */
+            clip-path: polygon(0 0, 50% 90%, 100% 0, 100% 10%, 50% 100%, 0 10%);
+            background-attachment: fixed;
+            background-size: var(--bg-size);
+            background-image: var(--bg-gradient);
+        }
+
+        .next:hover::after {
+            bottom: -26px;
         }
 
         .hidden {
@@ -106,8 +158,8 @@
 
         .gradient-clip {
             background-attachment: fixed;
-                background-size: var(--bg-size);
-                background-image: var(--bg-gradient);
+            background-size: var(--bg-size);
+            background-image: var(--bg-gradient);
         }
 
         @media screen and (min-width: 800px) {
@@ -130,276 +182,6 @@
         }
     </style>
     <style>
-        #cover {
-            padding: 0;
-        }
-        #cover>img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            overflow: hidden;
-        }
-
-        #cover h1,
-        #cover p {
-            color: transparent;
-            background-clip: text;
-        }
-
-        #cover h1 {
-            font-family: attaction, cursive;
-            margin: 0;
-            font-size: 2em;
-        }
-
-        #cover>div {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            padding: .5em 1em;
-
-            font-size: 1.8em;
-            text-align: center;
-            color: transparent;
-            background-clip: text;
-        }
-
-        @media screen and (min-width: 800px) {
-            #cover>div {
-                position: fixed;
-                top: 0;
-                width: unset;
-                font-size: 4em;
-                text-align: unset;
-            }
-
-            #title {
-                transition: color .3s ease-in;
-            }
-
-            #title.scrolled {
-                color: var(--corn);
-            }
-
-            #subtitle {
-                transition: visibility .1s ease-in;
-            }
-
-            #subtitle.scrolled {
-                visibility: hidden;
-            }
-        }
-    </style>
-    <style>
-        #countdown {
-            display: flex;
-            flex-wrap: wrap;
-            column-gap: 2px;
-            row-gap: 6px;
-            align-items: baseline;
-            justify-content: center;
-
-            position: absolute;
-            bottom: 0;
-
-            transition: visibility 0.1s ease-in, opacity .8s ease-in;
-            visibility: visible;
-            opacity: 1;
-        }
-
-
-        #countdown.hidden>.digit {
-            background-size: 150% 95%;
-
-        }
-
-        #countdown>.digit,
-        #countdown>.sep {
-            font-family: Glazed-Donuts, Helvetica Sans-serif;
-            flex-shrink: 0;
-            flex-grow: 0;
-            color: var(--corn);
-        }
-
-        #countdown>.digit {
-            width: 3rem;
-            font-size: 2em;
-            border-radius: 5px;
-            text-align: center;
-            vertical-align: middle;
-            transition: background-size 1.5s ease-in;
-        }
-
-        #countdown>.sep {
-            margin-right: 1ch;
-            font-weight: 100;
-        }
-
-        #countdown>.flex-break {
-            flex-basis: 100%;
-            width: 0;
-        }
-
-        #countdown>.tick {
-            animation: tick 1s;
-        }
-
-        @keyframes tick {
-            20% {
-                background-size: 150% 95%;
-            }
-        }
-
-        @media screen and (min-width: 800px) {
-            #countdown>.flex-break {
-                display: none;
-            }
-
-            #countdown {
-                flex-wrap: nowrap;
-                position: fixed;
-                bottom: 0;
-                width: 61.8%;
-            }
-
-            @keyframes tick {
-                20% {
-                    background-size: 180vw 114vh;
-                }
-            }
-        }
-    </style>
-    <style>
-        #welcome {
-            text-align: center;
-            background-color: var(--corn);
-            padding: 5%;
-        }
-
-        #welcome .background {
-            padding: 4px 4px 0 4px;
-            height: 100%;
-            width: 100%;
-        }
-
-        #welcome .inset {
-            z-index: 0;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-
-            padding-top: 0.8em;
-            background-color: var(--corn);
-        }
-
-        #welcome h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-
-        #welcome h2 {
-            font-size: 2em;
-            margin: 0;
-        }
-
-        #rsvp {
-            z-index: 0;
-            display: inline-block;
-            font-size: 3em;
-            flex-grow: 0;
-            align-self: center;
-            text-decoration: none;
-
-            letter-spacing: .2em;
-            padding: 4px;
-            position: relative;
-
-            transition: background-size .4s linear;
-            background-clip: unset;
-            /* font-family: 'Glazed-Donut'; */
-            color: unset;
-        }
-
-        #rsvp>span {
-            background: var(--corn);
-            padding: 0 .2em 0 .4em;
-            transition: background .2s ease-in;
-        }
-
-        #rsvp>span>span {
-            color: transparent;
-            background-clip: text;
-            transition: color .2s ease-in;
-        }
-
-        #rsvp:hover {
-            background-size: 88vw 70vh !important;
-        }
-
-        #rsvp:hover>span {
-            background: none;
-        }
-
-        #rsvp:hover>span>span {
-            color: var(--corn);
-            background: none;
-        }
-
-        #welcome p {
-            font-family: 'Shantel-Sans';
-            font-size: 1em;
-            margin: 0 5%;
-            padding: .6em 0;
-            border-top: black solid 1px;
-            border-bottom: black solid 1px;
-            font-weight: 100;
-        }
-
-        #welcome .next {
-            font-size: 1.2em;
-            text-decoration: none;
-            color: black;
-            position: relative;
-        }
-
-        #welcome .next::after {
-            content: "";
-            border-right: solid black 2px;
-            border-bottom: solid black 2px;
-            transform: scaleX(200%) rotate(45deg);
-            position: absolute;
-            bottom: -20px;
-            left: calc(50% - 14px);
-            right: auto;
-            width: 26px;
-            height: 26px;
-            transition: bottom .14s ease-in;
-        }
-
-        #welcome .next:hover::after {
-            bottom: -26px;
-        }
-
-        @media screen and (min-width: 800px) {
-            #welcome {
-                padding: 10%;
-            }
-
-            #welcome>.insert {
-                padding: 10%;
-            }
-
-            #welcome p {
-                font-size: 1.4em;
-                margin: 0 5%;
-                padding: 1em 0;
-            }
-        }
-    </style>
-
-    <style>
         #game {
             background: none;
         }
@@ -410,11 +192,11 @@
     <div class="container">
         <section id="cover">
             <img src="asset/cover.jpg" alt="Cover">
-            <div>
+            <div class="title">
                 <h1 id="title" class="gradient-clip">Katie andJoe</h1>
-                <p id="subtitle" class="gradient-clip">Join us at our wedding </p>
+                <p id="subtitle" class="gradient-clip">LA Girl Marries Midwest Boy</p>
             </div>
-            <h2 id="countdown" class="hidden">
+            <div id="countdown" class="hidden">
                 <span class="digit gradient-clip" day="0">&nbsp;</span>
                 <span class="digit gradient-clip" day="1">&nbsp;</span>
                 <span class="digit gradient-clip" day="2">&nbsp;</span>
@@ -429,7 +211,155 @@
                 <span class="digit gradient-clip" sec="0">&nbsp;</span>
                 <span class="digit gradient-clip" sec="1">&nbsp;</span>
                 <span class="sep">Seconds</span>
-            </h2>
+                <style>
+                    #countdown {
+                        display: flex;
+                        flex-wrap: wrap;
+                        column-gap: 2px;
+                        row-gap: 6px;
+                        align-items: baseline;
+                        justify-content: center;
+                        margin: 12px 0;
+                        position: absolute;
+                        bottom: 0;
+                        transition: visibility 0.1s ease-in, opacity .8s ease-in;
+                        visibility: visible;
+                        opacity: 1;
+                    }
+
+                    #countdown.hidden>.digit {
+                        background-size: 150% 95%;
+                    }
+
+                    #countdown>.digit,
+                    #countdown>.sep {
+                        font-family: Glazed-Donuts, Helvetica Sans-serif;
+                        font-size: 2em;
+                        flex-shrink: 0;
+                        flex-grow: 0;
+                        color: var(--corn);
+                    }
+
+                    #countdown>.digit {
+                        width: 3rem;
+                        font-size: 3em;
+                        border-radius: 5px;
+                        text-align: center;
+                        vertical-align: middle;
+                        transition: background-size 1.5s ease-in;
+                    }
+
+                    #countdown>.sep {
+                        margin-right: 1ch;
+                        font-weight: 100;
+                    }
+
+                    #countdown>.flex-break {
+                        flex-basis: 100%;
+                        width: 0;
+                    }
+
+                    #countdown>.tick {
+                        animation: tick 1s;
+                    }
+
+                    @keyframes tick {
+                        20% {
+                            background-size: 150% 95%;
+                        }
+                    }
+
+                    @media screen and (min-width: 800px) {
+                        #countdown>.flex-break {
+                            display: none;
+                        }
+
+                        #countdown {
+                            flex-wrap: nowrap;
+                            position: fixed;
+                            bottom: 0;
+                            width: 61.8%;
+                        }
+
+                        @keyframes tick {
+                            20% {
+                                background-size: 180vw 114vh;
+                            }
+                        }
+                    }
+                </style>
+            </div>
+            <style>
+                #cover {
+                    padding: 0;
+                }
+
+                #cover>img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    overflow: hidden;
+                }
+
+                #cover h1,
+                #cover p {
+                    color: transparent;
+                    background-clip: text;
+                }
+
+                #cover h1 {
+                    font-family: attaction, cursive;
+                    margin: 0;
+                    font-size: 1.8em;
+                }
+
+                #cover>.title {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    padding: .5em 1em;
+                    font-size: 1.8em;
+                    text-align: center;
+                    color: transparent;
+                    background-clip: text;
+                }
+
+                #subtitle {
+                    font-family: Glazed-Donuts, Helvetica Sans-serif;
+                }
+
+                @media screen and (min-width: 800px) {
+                    #cover>.title {
+                        position: fixed;
+                        top: 0;
+                        width: unset;
+                        font-size: 3em;
+                        text-align: unset;
+                    }
+
+                    #title {
+                        transition: color .3s ease-in;
+                    }
+
+                    #title.scrolled {
+                        color: var(--corn);
+                    }
+
+                    #subtitle {
+                        transition: visibility .1s ease-in;
+                    }
+
+                    #subtitle.scrolled {
+                        visibility: hidden;
+                    }
+                }
+
+                @media screen and (min-width: 1600px) {
+                    #cover>.title {
+                        font-size: 4em;
+                    }
+                }
+            </style>
         </section>
         <section id="welcome">
             <div class="background gradient-clip">
@@ -438,111 +368,226 @@
                         <h1>La Jolla, California</h1>
                         <h2>Saturday, May 17, 2025</h2>
                     </div>
-                    <a id="rsvp" class="gradient-clip" href="https://withjoy.com/joe-and-katie-may-25/rsvp"
-                        target="_blank">
+                    <a id="rsvp" class="gradient-clip" href="https://withjoy.com/joe-and-katie-may-25/rsvp" target="_blank">
                         <span>
-                            <span class="gradient-clip">
-                                RSVP
-                            </span>
+                            <span class="gradient-clip"> RSVP </span>
                         </span>
+                        <style>
+                            #rsvp {
+                                z-index: 0;
+                                display: inline-block;
+                                font-size: 3em;
+                                flex-grow: 0;
+                                align-self: center;
+                                text-decoration: none;
+                                letter-spacing: .2em;
+                                padding: 4px;
+                                position: relative;
+                                transition: background-size .4s linear;
+                                background-clip: unset;
+                                color: unset;
+                            }
+
+                            #rsvp>span {
+                                background: var(--corn);
+                                padding: 0 .2em 0 .4em;
+                                transition: background .2s ease-in;
+                            }
+
+                            #rsvp>span>span {
+                                color: transparent;
+                                background-clip: text;
+                                transition: color .2s ease-in;
+                            }
+
+                            #rsvp:hover {
+                                background-size: 88vw 70vh !important;
+                            }
+
+                            #rsvp:hover>span {
+                                background: none;
+                            }
+
+                            #rsvp:hover>span>span {
+                                color: var(--corn);
+                                background: none;
+                            }
+                        </style>
                     </a>
-                    <p>
-                        Our love story began in Seattle in the summer of 2018 when Katie, a bright-eyed intern, joined
-                        my team. It didn’t take long to realize there was more than just workplace synergy between us.
-                        After Katie returned to college and later moved to San Francisco for work, it seemed like we
-                        might never reconnect. But in 2020, with the pandemic and remote work changing everything, Katie
-                        made the bold decision to move to Seattle to be with me. Since then, we’ve survived the
-                        pandemic, gotten a puppy, traveled to new places, and moved to Houston. Now, we’re excited to
-                        start the next chapter of our lives together!
-                    </p>
+                    <p> Our love story began in Seattle in the summer of 2018 when Katie, a bright-eyed intern, joined my team. It didn’t take long to realize there was more than just workplace synergy between us. After Katie returned to
+                        college and later moved to San Francisco for work, it seemed like we might never reconnect. But in 2020, with the pandemic and remote work changing everything, Katie made the bold decision to move to Seattle to be
+                        with me. Since then, we’ve survived the pandemic, gotten a puppy, traveled to new places, and moved to Houston. Now, we’re excited to start the next chapter of our lives together! </p>
                     <a class="next" href="#info">View Event Details and More</a>
                 </div>
             </div>
+            <style>
+                #welcome {
+                    text-align: center;
+                }
+
+                #welcome .background {
+                    padding: 4px 4px 0 4px;
+                    height: 100%;
+                    width: 100%;
+                }
+
+                #welcome .inset {
+                    z-index: 0;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    padding-top: 0.8em;
+                    background-color: var(--corn);
+                }
+
+                #welcome p {
+                    font-family: 'Shantel-Sans';
+                    font-size: 1em;
+                    margin: 0 5%;
+                    padding: .6em 0;
+                    border-top: black solid 1px;
+                    border-bottom: black solid 1px;
+                    font-weight: 100;
+                }
+
+                @media screen and (min-width: 800px) {
+                    #welcome {
+                        padding: 10%;
+                    }
+
+                    #welcome>.insert {
+                        padding: 10%;
+                    }
+
+                    #welcome p {
+                        font-size: 1.4em;
+                        margin: 0 5%;
+                        padding: 1em 0;
+                    }
+                }
+            </style>
         </section>
         <section id="info">
-            <h2>Event Schedule</h2>
             <div class="schedule">
+                <h1>Event Schedule</h1>
                 <div class="time gradient-clip">4:00</div>
                 <div class="block gradient-clip">
-                    <h3>Ceremony</h3>
-                    <p><a class="gradient-clip"
+                    <h2>Ceremony</h2>
+                    <p><a
                             href="https://www.google.com/maps/place/The+Wedding+Bowl/@32.8441643,-117.2817798,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03435d0ba36d:0x51bd66d95ca99684!8m2!3d32.8441598!4d-117.2792049!16s%2Fg%2F11n7n8jjc_?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">The
                             Wedding Bowl / Cuvier Park</a></p>
                 </div>
                 <div class="time gradient-clip">4:30</div>
                 <div class="block gradient-clip">
-                    <h3>Cocktail Hour</h3>
-                    <p><a class="gradient-clip"
+                    <h2>Cocktail Hour</h2>
+                    <p><a
                             href="https://www.google.com/maps/place/Cuvier+Club+by+Wedgewood+Weddings/@32.8441955,-117.2792809,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03e52a93be8f:0x61b40b925e731938!8m2!3d32.844191!4d-117.276706!16s%2Fg%2F1vtzhhtk?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Cuvier
                             Club (5 minute walk)</a></p>
                 </div>
                 <div class="time gradient-clip">5:30</div>
                 <div class="block gradient-clip">
-                    <h3>Dinner, Music, Open Bar</h3>
+                    <h2>Dinner, Music, Open Bar</h2>
                 </div>
                 <div class="time gradient-clip">10:00</div>
+                <style>
+                    .schedule {
+                        text-align: left;
+                    }
+
+                    .schedule>.time {
+                        font-family: 'Sauced-Tomato';
+                        color: transparent;
+                        background-clip: text;
+                    }
+
+                    .schedule>.block {
+                        z-index: 0;
+                        display: inline-block;
+                        margin-left: 1em;
+                        position: relative;
+                        overflow: visible;
+                        padding-left: calc(1em + 4px);
+                    }
+
+                    .schedule>.block:after {
+                        content: "";
+                        z-index: -1;
+                        position: absolute;
+                        margin-left: 4px;
+                        left: 0;
+                        top: 0;
+                        width: calc(100% - 4px);
+                        height: 100%;
+                        background: var(--corn);
+                    }
+                </style>
             </div>
+            <div>
+                <h1>Island Cocktail Attire</h1>
+                <p> Please attend wearing cocktail attire. Bright and patterned styles are encoraged. Men should wear a suit or dress shirt. Women should wear a cocktail dress or dressy seperates. We recommend a jacket for the evenings this
+                    time of year. </p>
+            </div>
+            <a class="next" href="#travel">Making Travel Plans</a>
             <style>
-            </style>
-            <style>
-                .schedule {
-                    text-align: left;
-                }
-
-                .schedule>.time {
-                    font-family: 'Sauced-Tomato';
-                    color: transparent;
-                    background-clip: text;
-                }
-
-                .schedule>.block {
-                    z-index: 0;
-                    display: inline-block;
-                    margin-left: 1em;
-                    position: relative;
-                    overflow: visible;
-                    padding-left: calc(1em + 4px);
-                }
-
-                .schedule>.block:after {
-                    content: "";
-                    z-index: -1;
-                    position: absolute;
-                    margin-left: 4px;
-                    left: 0;
-                    top: 0;
-                    width: calc(100% - 4px);
-                    height: 100%;
-                    background: var(--corn);
-                }
             </style>
         </section>
-        <section id="game"></section>
+        <section id="travel">
+            <div>
+                <h1>Travel Recommendations</h1>
+                <p> The closest airport is San Diego International Airport (SAN) about 14 miles from the venue. LAX is the next closest large airport, but is 2 hours away by car. Traffic between L.A. and San Diego is notoriously heavy. </p>
+                <p> For transportation during your stay, we recommend Uber/Lyft or renting a car. However, the venue has extremely limited street parking, so whichever option you choose, we recommend that you Uber/Lyft or walk to the event
+                    itself. </p>
+            </div>
+            <div>
+                <h1>Accomodations</h1>
+                <p> We have 2 room blocks available for our guests. One is near the venue in beautiful sea-side La Jolla. The second is in downtown San Diego (25 minutes by car) for those who are looking to visit the city proper. </p>
+                <h2>The Empress</h2>
+                <p> The Empress is walking distance to the venue. </p>
+                <h2>The Westin</h2>
+                <p> The Westin is in downtown San Diego, which is 25 minutes from La Jolla. </p>
+            </div>
+            <a class="next" href="#faq">Questions?</a>
+        </section>
+        <section id="faq">
+            <div>
+                <h1>Frequently Asked Questions</h1>
+                <h2>Do you have a Registry?</h2>
+                <p> In place of a traditional gift registry, we would be honored to receive red envelopes. These are known as “红包“ (“hong bao”) in Chinese culture. These envelopes, which typically contain money, are a meaningful tradition
+                    that symbolize good fortune. If you still want to give a gift, we have <a href="https://withjoy.com/joe-and-katie-may-25/registry">a small registry</a>. </p>
+                <h2>Can I bring my children?</h2>
+                <p> Unfortunately, we can only accommodate the children of immediate family members. We hope that you will understand this decision and that you will still be able to join us on our special day. </p>
+                <h2>What time should I arrive?</h2>
+                <p> The ceremony is at 4pm. Please give yourself time to park and find the ceremony site. Traffic can be difficult in the San Diego. </p>
+                <h2>Is there Parking?</h2>
+                <p> There is limited street parking at the venue. We encourage you to take a cab or walk if possible. </p>
+                <h2>What will the weather be like?</h2>
+                <p> The ceremony is planned for outside and dining is inside. The average temperature of La Jolla in May is 70°F, but the temperature drops after sunset. </p>
+            </div>
+            <a class="next" href="#deck">Open a New Deck</a>
+        </section>
+        <section id="deck">
+        </section>
     </div>
 </body>
-
 <script>
-    function trackScroll() {
-        const title = document.getElementById('title');
-        const subtitle = document.getElementById('subtitle');
-        let frame;
-        document.querySelector('.container').addEventListener('scroll', params => {
-            if (frame) cancelAnimationFrame(frame);
-            frame = requestAnimationFrame(() => {
-                if (params.target.scrollTop >= window.innerHeight / 4) {
-                    title.classList.add('scrolled');
-                    subtitle.classList.add('scrolled');
-                } else {
-                    title.classList.remove('scrolled');
-                    subtitle.classList.remove('scrolled');
-                }
-            });
-        }, { passive: true });
-    }
-
-    trackScroll();
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    let frame;
+    document.querySelector('.container').addEventListener('scroll', params => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+            if (params.target.scrollTop >= window.innerHeight / 4) {
+                title.classList.add('scrolled');
+                subtitle.classList.add('scrolled');
+            } else {
+                title.classList.remove('scrolled');
+                subtitle.classList.remove('scrolled');
+            }
+        });
+    }, { passive: true });
 </script>
-
 <script>
     const countdown = document.getElementById('countdown');
     const till = new Date("May 17, 2025 16:00:00").getTime();
