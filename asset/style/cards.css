@@ -1,0 +1,166 @@
+#deck {
+    width: 100vw;
+    height: auto;
+    aspect-ratio: 1 / .55;
+    margin: 2em 0;
+    position: relative;
+    perspective: 1000px;
+    background: none;
+    display: block;
+}
+
+.base {
+    position: absolute;
+    left: calc(5% - 3px);
+    top: calc(10% - 3px);
+    width: 26%;
+    aspect-ratio: 5 / 7;
+    background: cornsilk;
+    border-radius: 5%;
+    position: absolute;
+    box-shadow: inset 0px 0px 3px 2px #44444d81;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.base h2 {
+    padding: 4px 8px;
+    border: solid 2px var(--corn);
+    /* background: var(--corn); */
+    background-clip: text;
+    color: transparent;
+}
+
+.base p {
+    color: var(--corn);
+}
+
+.base.empty {
+    background: none;
+    box-shadow: none;
+}
+
+@keyframes stacked {
+    0% {
+        left: -2000%;
+        top: 00%;
+        transform: rotateZ(-30deg);
+    }
+
+    80% {
+        top: 12%;
+        left: 15%;
+        transform: rotateZ(20deg);
+    }
+
+    90% {
+        top: 11%;
+        left: 2%;
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        top: 10%;
+        left: 5%;
+        transform: rotateZ(0deg);
+    }
+}
+
+@keyframes held {
+    0% {
+        top: 10%;
+        left: 5%;
+        transform: rotateY(0deg);
+    }
+
+    10% {
+        top: 20%;
+        left: 5%;
+        transform: scale(1.3) rotateZ(-10deg) rotateY(0deg);
+    }
+
+    100% {
+        top: 10%;
+        left: 40%;
+        transform: scale(1.3) rotateY(180deg);
+    }
+}
+
+.card[state="held"] {
+    animation-name: held;
+    animation-duration: .6s;
+    box-shadow: 0px 0px 20px #44444d81;
+}
+
+.card[state="holding"] {
+    top: 10%;
+    left: 40%;
+    animation-name: unset;
+    animation-duration: unset;
+    box-shadow: 0px 0px 20px #44444d81;
+    transform: scale(1.3) rotateX(0deg) rotateY(180deg);
+    transition: transform 0.2s linear;
+}
+
+.card[state="discarded"] {
+    animation-name: discarded;
+    animation-duration: .2s;
+    box-shadow: 1px 1px 5px #44444d81;
+}
+
+.card {
+    animation: stacked;
+    animation-duration: 1s;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 26%;
+    aspect-ratio: 5 / 7;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 5%;
+}
+
+.card[state="holding"] .glimmer {
+    visibility: visible;
+}
+
+.glimmer {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* scale(5%, 1.3) because this is shown only whole holding*/
+    border-radius: 3.5%;
+    opacity: 0.0;
+    transition: opacity 2s linear;
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-front>img,
+.card-back>img {
+    width: 100%;
+    height: 100%;
+}
+
+.card-front {
+    transform: rotateY(180deg);
+}
+
+.card-back {}
