@@ -4,12 +4,14 @@ const deck = document.getElementById('deck');
 const base = deck.getElementsByClassName('base')[0];
 const seen = new Set();
 
+spawnPack('start');
+
 function openPack() {
     cards().forEach(c => now(c, 'discarded'));
 
     const seenCards = {};
     // index is the paint order not open order so its reversed
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < 12; i++) {
         const id = Math.floor(Math.random() * 18) + 1
         if (id === 18 && i > 11) {
             --i; // No wildcard early 
@@ -32,10 +34,7 @@ function openPack() {
         setTimeout(() => deck.appendChild(createCard(id, i)), 20 * i);
     }
 
-    setTimeout(() => {
-        deck.querySelector('.base>p').innerHTML = `${seen.size} / 18 found`;
-        base.classList.remove('empty');
-    }, 1000);
+    setTimeout(() => base.classList.remove('empty'), 1000);
 
     const discards = [...deck.querySelectorAll('.card[state=discarded]')];
     if (discards.length > 32) {
@@ -59,6 +58,11 @@ function createCard(id, i) {
                 <img src="asset/cards/back-${type}.png" />
             </div>
         `;
+
+    card.transform = function (rX, rY) {
+        card.style.transform = `scale(1.3) rotateX(${rX}deg) rotateY(${180 + rY}deg)`;
+    }
+
     card.addEventListener('click', handleClick.bind(card));
     card.addEventListener('mousemove', handleHover.bind(card));
     card.addEventListener('mouseleave', handleReleaseHover.bind(card));
@@ -105,10 +109,12 @@ function now(card, state) {
             card.setAttribute('discard', discardI);
             break;
         }
-
     }
 
-    return card.setAttribute('state', state);
+    card.setAttribute('state', state);
+    if (cards().every(c => is(c, 'held', 'holding', 'discarded'))) {
+        spawnPack();
+    }
 }
 
 function handleClick(e) {
@@ -138,7 +144,7 @@ function handleHover(e) {
 
     const rotateX = distanceY * 0.10;
     const rotateY = distanceX * -0.20;
-    this.style.transform = `scale(1.3) rotateX(${rotateX}deg) rotateY(${180 + rotateY}deg)`;
+    this.style.transform = this.transform(rotateX, rotateY);
 
     const glimmerX = rectX / rect.width * 100;
     const glimmerY = rectY / rect.height * 100;
@@ -181,4 +187,47 @@ function createDiscardStyles() {
         `;
     }
     document.head.appendChild(style);
+}
+
+function spawnPack(phase) {
+    let pack = deck.getElementsByClassName('pack');
+    if ([...pack].length > 0) {
+        return;
+    }
+
+    pack = document.createElement('div');
+    pack.classList.add('pack');
+    if (phase === 'start') {
+        pack.classList.add('start');
+        pack.setAttribute('state', 'holding');
+        pack.innerHTML = `
+            <img src="asset/cards/pack-1.png" />
+            <div class="glimmer"></div>
+            <h1>Open Me</h1>
+        `;
+        deck.insertBefore(pack, base.nextSibling);
+    } else {
+        const id = Math.ceil(Math.random() * 2);
+        pack.setAttribute('state', 'spawned');
+        pack.innerHTML = `
+            <img src="asset/cards/pack-${id}.png" />
+            <div class="glimmer"></div>
+            <h2>Found ${seen.size} of 18</h2>
+        `;
+        deck.insertBefore(pack, base.nextSibling);
+        setTimeout(() => pack.setAttribute('state', 'holding'), 100)
+    }
+
+    pack.transform = function (rX, rY) {
+        pack.style.transform = `rotateX(${rX}deg) rotateY(${rY}deg)`;
+    }
+
+    pack.addEventListener('mousemove', handleHover.bind(pack));
+    pack.addEventListener('mouseleave', handleReleaseHover.bind(pack));
+    pack.addEventListener('click', () => {
+        pack.style.transform = "";
+        pack.setAttribute('state', 'unwrapped');
+        openPack();
+        setTimeout(() => pack.remove(), 1000);
+    });
 }

@@ -7,6 +7,73 @@
     perspective: 1000px;
     background: none;
     display: block;
+    overflow: hidden;
+}
+
+.pack {
+    position: absolute;
+    left: calc(5% - 3px);
+    top: calc(10% - 3px);
+    width: 26%;
+    aspect-ratio: 1085 / 1573;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    perspective: 1000px;
+    animation-fill-mode: forwards;
+    transition: left .6s, top .6s;
+}
+
+.pack[state="spawned"] {
+    left: -1000px;
+}
+
+.pack[state="unwrapped"] {
+    top: 2000px
+}
+
+.pack>img {
+    filter: drop-shadow(0px 0px 20px #44444d81);
+}
+
+.pack.start {
+    left: calc(50% - 13%);
+}
+
+.pack>h1,
+.pack>h2 {
+    position: absolute;
+    bottom: 45%;
+    line-height: 0;
+    text-align: center;
+    width: 100%;
+    color: var(--corn);
+    margin: 0;
+}
+
+.pack.start>h1 {
+    animation: pulse 2s infinite;
+}
+
+.pack .glimmer {
+    mask-image: url("/asset/cards/pack-1.png");
+    mask-size: contain;
+    border-radius: 0;
+    /* idk */
+    height: calc(100% - 4px);
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateZ(0);
+    }
+
+    50% {
+        transform: translateZ(30px);
+    }
+
+    100% {
+        transform: translateZ(0);
+    }
 }
 
 .base {
@@ -145,6 +212,10 @@
     transition: opacity 2s linear;
 }
 
+div[state="holding"] .glimmer {
+    visibility: visible;
+}
+
 .card-front,
 .card-back {
     position: absolute;
@@ -153,6 +224,7 @@
     backface-visibility: hidden;
 }
 
+.pack>img,
 .card-front>img,
 .card-back>img {
     width: 100%;

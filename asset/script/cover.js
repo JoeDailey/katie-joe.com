@@ -1,5 +1,5 @@
-const title = document.getElementById('title');
-const subtitle = document.getElementById('subtitle');
+const title = document.querySelector('.title>h1');
+const subtitle = document.querySelector('.title>p');
 let frame;
 document.querySelector('.container').addEventListener('scroll', params => {
     if (frame) cancelAnimationFrame(frame);
