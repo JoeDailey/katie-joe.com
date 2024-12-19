@@ -208,21 +208,25 @@ function handleReleaseHover() {
 
 function createDiscardStyles() {
     const style = document.createElement('style');
+    function calc(base, value, unit) {
+        return `calc(var(${base}) ${value < 0 ? '-' : '+'} ${Math.abs(value)}${unit})`;
+    }
+
     for (i = 0; i < 10; i++) {
         const rotate = Math.floor(100 * Math.random()) - 50;
-        const shiftX = 60 + Math.floor(4 * Math.random()) - 2;
-        const shiftY = 20 + Math.floor(4 * Math.random()) - 2;
+        const shiftX = Math.floor(4 * Math.random()) - 2;
+        const shiftY = Math.floor(4 * Math.random()) - 2;
         style.innerHTML += `
             @keyframes discarded${i} {
                 0% {
-                    top: var(--top);
-                    left: 40%;
+                    top: var(--held-top);
+                    left: var(--held-left);
                     transform: scale(1.3) rotateY(180deg);
                 }
                 
                 100% {
-                    left: ${shiftX}%;
-                    top: ${shiftY}%;
+                    top:  ${calc('--discard-top', shiftY, '%')};
+                    left: ${calc('--discard-left', shiftX, '%')};
                     transform: scale(1) rotateY(180deg) rotateZ(${rotate}deg);
                 }
             }
