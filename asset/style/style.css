@@ -132,7 +132,6 @@ section a {
 
 @media screen and (min-width: 800px) {
     #info {
-        height: 100%;
         display: block;
         column-count: 2;
         column-gap: 1em;
