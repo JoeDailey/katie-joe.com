@@ -72,7 +72,7 @@ section h3 {
 
 section p {
     margin: .2em 0;
-    font-size: 1em;
+    font-size: .8em;
     font-family: 'Shantel-Sans';
 }
 
@@ -131,15 +131,6 @@ section a {
 }
 
 @media screen and (min-width: 800px) {
-    /* :root {
-        --bg-size: 100vw 110vh;
-        --bg-gradient: radial-gradient(farthest-corner at 50% 50%,
-                var(--teal) 50%,
-                var(--ctg-2) 65%,
-                var(--ctg-1) 70%,
-                var(--coral) 80%);
-    } */
-
     #info {
         height: 100%;
         display: block;
