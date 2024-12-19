@@ -46,6 +46,7 @@
 
     #welcome p {
         margin: 0 5%;
+        font-size: 1em;
         padding: 1em 0;
     }
 }
