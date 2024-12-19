@@ -29,7 +29,7 @@
     font-weight: 100;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1200px) {
     #welcome {
         padding: 10%;
     }

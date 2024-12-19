@@ -31,20 +31,19 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: scroll;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     scroll-behavior: smooth;
 }
 
 section {
     text-align: left;
     padding: 5%;
-    height: 90vh;
+    min-height: 90vh;
     scroll-snap-align: start;
     position: relative;
     background-color: var(--corn);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-shrink: 0;
 }
 
 section>* {
@@ -53,8 +52,12 @@ section>* {
 }
 
 section h1 {
-    margin: 0;
+    margin: .5em 0 0 0;
     font-size: 2.8em;
+}
+
+section h1:first-of-type {
+    margin: 0;
 }
 
 section h2 {
@@ -83,7 +86,7 @@ section a {
 }
 
 .next {
-    margin-top: 1em;
+    margin: 1em 0;
     display: block;
     text-align: center;
     font-size: 1.4em;
@@ -128,6 +131,25 @@ section a {
 }
 
 @media screen and (min-width: 800px) {
+    /* :root {
+        --bg-size: 100vw 110vh;
+        --bg-gradient: radial-gradient(farthest-corner at 50% 50%,
+                var(--teal) 50%,
+                var(--ctg-2) 65%,
+                var(--ctg-1) 70%,
+                var(--coral) 80%);
+    } */
+
+    #info {
+        height: 100%;
+        display: block;
+        column-count: 2;
+        column-gap: 1em;
+        scroll-margin-bottom: 10vh;
+    }
+}
+
+@media screen and (min-width: 1200px) {
     :root {
         --bg-size: 100vw 110vh;
         --bg-gradient: radial-gradient(farthest-corner at 50% 50%,
@@ -138,10 +160,51 @@ section a {
     }
 
     .container {
-        grid-template-columns: 61.8% auto;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 61.8% 38.2%;
     }
 
     section {
         height: 100vh;
+        display: flex;
     }
+
+    #cover {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+
+    #welcome {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+
+    #game {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        height: unset;
+    }
+
+    #info {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        columns: unset;
+        scroll-margin-bottom: unset;
+        height: max-content;
+    }
+
+    #info .next {
+        display: none;
+    }
+
 }

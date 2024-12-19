@@ -6,6 +6,53 @@ const seen = new Set();
 
 spawnPack('start');
 
+function spawnPack(phase) {
+    let pack = deck.getElementsByClassName('pack');
+    if ([...pack].length > 0) {
+        return;
+    }
+
+    pack = document.createElement('div');
+    pack.classList.add('pack');
+    if (phase === 'start') {
+        pack.classList.add('start');
+        pack.setAttribute('state', 'holding');
+        pack.innerHTML = `
+            <img src="asset/cards/pack-1.png" />
+            <div class="glimmer"></div>
+            <svg viewBox="0 0 100 18">
+                <text text-anchor="middle" x="50" y="18" fill="#faf5ddff">Open Me</text>
+            </svg>
+        `;
+        deck.insertBefore(pack, base.nextSibling);
+    } else {
+        const id = Math.ceil(Math.random() * 2);
+        pack.setAttribute('state', 'spawned');
+        pack.innerHTML = `
+            <img src="asset/cards/pack-${id}.png" />
+            <div class="glimmer"></div>
+            <svg viewBox="0 0 100 18">
+                <text text-anchor="middle" x="50" y="18" fill="#faf5ddff">${seen.size} of 18 Found</text>
+            </svg>
+        `;
+        deck.insertBefore(pack, base.nextSibling);
+        setTimeout(() => pack.setAttribute('state', 'holding'), 100)
+    }
+
+    pack.transform = function (rX, rY) {
+        pack.style.transform = `rotateX(${rX}deg) rotateY(${rY}deg)`;
+    }
+
+    pack.addEventListener('mousemove', handleHover.bind(pack));
+    pack.addEventListener('mouseleave', handleReleaseHover.bind(pack));
+    pack.addEventListener('click', () => {
+        pack.style.transform = "";
+        pack.setAttribute('state', 'unwrapped');
+        openPack();
+        setTimeout(() => pack.remove(), 1000);
+    });
+}
+
 function openPack() {
     cards().forEach(c => now(c, 'discarded'));
 
@@ -168,7 +215,7 @@ function createDiscardStyles() {
         style.innerHTML += `
             @keyframes discarded${i} {
                 0% {
-                    top: 10%;
+                    top: var(--top);
                     left: 40%;
                     transform: scale(1.3) rotateY(180deg);
                 }
@@ -187,47 +234,4 @@ function createDiscardStyles() {
         `;
     }
     document.head.appendChild(style);
-}
-
-function spawnPack(phase) {
-    let pack = deck.getElementsByClassName('pack');
-    if ([...pack].length > 0) {
-        return;
-    }
-
-    pack = document.createElement('div');
-    pack.classList.add('pack');
-    if (phase === 'start') {
-        pack.classList.add('start');
-        pack.setAttribute('state', 'holding');
-        pack.innerHTML = `
-            <img src="asset/cards/pack-1.png" />
-            <div class="glimmer"></div>
-            <h1>Open Me</h1>
-        `;
-        deck.insertBefore(pack, base.nextSibling);
-    } else {
-        const id = Math.ceil(Math.random() * 2);
-        pack.setAttribute('state', 'spawned');
-        pack.innerHTML = `
-            <img src="asset/cards/pack-${id}.png" />
-            <div class="glimmer"></div>
-            <h2>Found ${seen.size} of 18</h2>
-        `;
-        deck.insertBefore(pack, base.nextSibling);
-        setTimeout(() => pack.setAttribute('state', 'holding'), 100)
-    }
-
-    pack.transform = function (rX, rY) {
-        pack.style.transform = `rotateX(${rX}deg) rotateY(${rY}deg)`;
-    }
-
-    pack.addEventListener('mousemove', handleHover.bind(pack));
-    pack.addEventListener('mouseleave', handleReleaseHover.bind(pack));
-    pack.addEventListener('click', () => {
-        pack.style.transform = "";
-        pack.setAttribute('state', 'unwrapped');
-        openPack();
-        setTimeout(() => pack.remove(), 1000);
-    });
 }

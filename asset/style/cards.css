@@ -1,11 +1,20 @@
+#game {
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+
+#board {
+    height: 100%;
+    width: 100%;
+}
+
 #deck {
-    width: 100vw;
-    height: auto;
-    aspect-ratio: 1 / .55;
-    margin: 2em 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     position: relative;
     perspective: 1000px;
-    background: none;
     display: block;
     overflow: hidden;
 }
@@ -13,7 +22,7 @@
 .pack {
     position: absolute;
     left: calc(5% - 3px);
-    top: calc(10% - 3px);
+    top: calc(var(--top) - 3px);
     width: 26%;
     aspect-ratio: 1085 / 1573;
     transform-style: preserve-3d;
@@ -39,18 +48,21 @@
     left: calc(50% - 13%);
 }
 
-.pack>h1,
-.pack>h2 {
+.pack>svg {
     position: absolute;
-    bottom: 45%;
+    top: 45%;
+    left: 0;
     line-height: 0;
     text-align: center;
     width: 100%;
-    color: var(--corn);
     margin: 0;
 }
 
-.pack.start>h1 {
+.pack>svg>text {
+    color: "var(--corn)"
+}
+
+.pack.start>svg {
     animation: pulse 2s infinite;
 }
 
@@ -79,7 +91,7 @@
 .base {
     position: absolute;
     left: calc(5% - 3px);
-    top: calc(10% - 3px);
+    top: calc(var(--top) - 3px);
     width: 26%;
     aspect-ratio: 5 / 7;
     background: cornsilk;
@@ -111,6 +123,10 @@
     box-shadow: none;
 }
 
+:root {
+    --top: 20%;
+}
+
 @keyframes stacked {
     0% {
         left: -2000%;
@@ -119,19 +135,19 @@
     }
 
     80% {
-        top: 12%;
+        top: calc(var(--top) + 2%);
         left: 15%;
         transform: rotateZ(20deg);
     }
 
     90% {
-        top: 11%;
+        top: calc(var(--top) + 1%);
         left: 2%;
         transform: rotateZ(0deg);
     }
 
     100% {
-        top: 10%;
+        top: var(--top);
         left: 5%;
         transform: rotateZ(0deg);
     }
@@ -139,19 +155,19 @@
 
 @keyframes held {
     0% {
-        top: 10%;
+        top: var(--top);
         left: 5%;
         transform: rotateY(0deg);
     }
 
     10% {
-        top: 20%;
+        top: calc(var(--top) + 10%);
         left: 5%;
         transform: scale(1.3) rotateZ(-10deg) rotateY(0deg);
     }
 
     100% {
-        top: 10%;
+        top: var(--top);
         left: 40%;
         transform: scale(1.3) rotateY(180deg);
     }
@@ -164,7 +180,7 @@
 }
 
 .card[state="holding"] {
-    top: 10%;
+    top: var(--top);
     left: 40%;
     animation-name: unset;
     animation-duration: unset;
@@ -183,7 +199,7 @@
     animation: stacked;
     animation-duration: 1s;
     position: absolute;
-    top: 10%;
+    top: var(--top);
     left: 5%;
     width: 26%;
     aspect-ratio: 5 / 7;
@@ -236,3 +252,15 @@ div[state="holding"] .glimmer {
 }
 
 .card-back {}
+
+
+@media screen and (min-width: 1200px) {
+    .board {
+        left: 0;
+        height: 100vh;
+        width: 61.8vw;
+        position: sticky;
+        top: 0;
+        padding-top: 50%;
+    }
+}

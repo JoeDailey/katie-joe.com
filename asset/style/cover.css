@@ -36,7 +36,16 @@
     font-family: Glazed-Donuts, Helvetica Sans-serif;
 }
 
+
 @media screen and (min-width: 800px) {
+    #cover>.title {
+        width: unset;
+        font-size: 3em;
+        text-align: unset;
+    }
+}
+
+@media screen and (min-width: 1200px) {
     #cover>.title {
         position: fixed;
         top: 0;
