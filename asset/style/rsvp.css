@@ -1,39 +1,39 @@
 #rsvp {
-    z-index: 0;
-    display: inline-block;
-    font-size: 3em;
-    flex-grow: 0;
-    align-self: center;
-    text-decoration: none;
-    letter-spacing: .2em;
-    padding: 4px;
-    position: relative;
-    transition: background-size .4s linear;
-    background-clip: unset;
-    color: unset;
+  z-index: 0;
+  display: inline-block;
+  font-size: 3em;
+  flex-grow: 0;
+  align-self: center;
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  padding: 4px;
+  position: relative;
+  transition: background-size 0.4s linear;
+  background-clip: unset;
+  color: unset;
 }
 
-#rsvp>span {
-    background: var(--corn);
-    padding: 0 .2em 0 .4em;
-    transition: background .2s ease-in;
+#rsvp > span {
+  background: var(--corn);
+  padding: 0 0.2em 0 0.4em;
+  transition: background 0.2s ease-in;
 }
 
-#rsvp>span>span {
-    color: transparent;
-    background-clip: text;
-    transition: color .2s ease-in;
+#rsvp > span > span {
+  color: transparent;
+  background-clip: text;
+  transition: color 0.2s ease-in;
 }
 
 #rsvp:hover {
-    background-size: 88vw 70vh !important;
+  background-size: 88vw 70vh !important;
 }
 
-#rsvp:hover>span {
-    background: none;
+#rsvp:hover > span {
+  background: none;
 }
 
-#rsvp:hover>span>span {
-    color: var(--corn);
-    background: none;
+#rsvp:hover > span > span {
+  color: var(--corn);
+  background: none;
 }

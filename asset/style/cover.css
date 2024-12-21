@@ -1,78 +1,77 @@
 #cover {
-    padding: 0;
+  padding: 0;
 }
 
-#cover>img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: hidden;
+#cover > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 #cover h1,
 #cover p {
-    color: transparent;
-    background-clip: text;
+  color: transparent;
+  background-clip: text;
 }
 
 #cover h1 {
-    font-family: attaction, cursive;
-    margin: 0;
-    font-size: 1.4em;
+  font-family: attaction, cursive;
+  margin: 0;
+  font-size: 1.4em;
 }
 
-#cover>.title {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding: .5em 1em;
-    font-size: 1.8em;
-    text-align: center;
-    color: transparent;
-    background-clip: text;
+#cover > .title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 1.8em;
+  text-align: center;
+  color: transparent;
+  background-clip: text;
 }
 
-#cover>.title>p {
-    font-family: Glazed-Donuts, Helvetica Sans-serif;
+#cover > .title > p {
+  font-family: Glazed-Donuts, Helvetica Sans-serif;
 }
-
 
 @media screen and (min-width: 800px) {
-    #cover>.title {
-        width: unset;
-        font-size: 3em;
-        text-align: unset;
-    }
+  #cover > .title {
+    width: unset;
+    font-size: 3em;
+    text-align: unset;
+  }
 }
 
 @media screen and (min-width: 1200px) {
-    #cover>.title {
-        position: fixed;
-        top: 0;
-        width: unset;
-        font-size: 3em;
-        text-align: unset;
-    }
+  #cover > .title {
+    position: fixed;
+    top: 0;
+    width: unset;
+    font-size: 3em;
+    text-align: unset;
+  }
 
-    #cover>.title>h1 {
-        transition: color .3s ease-in;
-    }
+  #cover > .title > h1 {
+    transition: color 0.3s ease-in;
+  }
 
-    #cover>.title>h1.scrolled {
-        color: var(--corn);
-    }
+  #cover > .title > h1.scrolled {
+    color: var(--corn);
+  }
 
-    #cover>.title>p {
-        transition: visibility .1s ease-in;
-    }
+  #cover > .title > p {
+    transition: visibility 0.1s ease-in;
+  }
 
-    #cover>.title>p.scrolled {
-        visibility: hidden;
-    }
+  #cover > .title > p.scrolled {
+    visibility: hidden;
+  }
 }
 
 @media screen and (min-width: 1600px) {
-    #cover>.title {
-        font-size: 4em;
-    }
+  #cover > .title {
+    font-size: 4em;
+  }
 }

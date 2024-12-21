@@ -1,9 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel=icon href=asset/image/favicon.svg type="image/x-icon">
     <meta name="theme-color" content="#faf5dd" />
     <meta name="application-name" content="Katie and Joe" />
@@ -13,146 +12,222 @@
     <link rel="apple-touch-icon" href="favicon.png" />
     <title>Katie and Joe's Wedding</title>
     <style>
-        @font-face {
-            font-family: Attaction;
-            src: url("asset/font/attraction.ttf");
-        }
+      @font-face {
+        font-family: Attaction;
+        src: url("asset/font/attraction.ttf");
+      }
 
-        @font-face {
-            font-family: Glazed-Donuts;
-            src: url("asset/font/glazed-donuts.otf") format("opentype");
-            font-weight: bold;
-        }
+      @font-face {
+        font-family: Glazed-Donuts;
+        src: url("asset/font/glazed-donuts.otf") format("opentype");
+        font-weight: bold;
+      }
 
-        @font-face {
-            font-family: Sauced-Tomato;
-            src: url("asset/font/sauced-tomato.otf") format("opentype");
-        }
+      @font-face {
+        font-family: Sauced-Tomato;
+        src: url("asset/font/sauced-tomato.otf") format("opentype");
+      }
 
-        @font-face {
-            font-family: Shantel-Sans;
-            src: url("asset/font/ShantellSans-Regular.ttf");
-        }
+      @font-face {
+        font-family: Shantel-Sans;
+        src: url("asset/font/ShantellSans-Regular.ttf");
+      }
     </style>
-    <link rel="stylesheet" href="asset/style/style.css">
-    <link rel="stylesheet" href="asset/style/cover.css">
-    <link rel="stylesheet" href="asset/style/countdown.css">
-    <link rel="stylesheet" href="asset/style/welcome.css">
-    <link rel="stylesheet" href="asset/style/rsvp.css">
-    <link rel="stylesheet" href="asset/style/schedule.css">
-    <link rel="stylesheet" href="asset/style/cards.css">
-</head>
+    <link rel="stylesheet" href="asset/style/style.css" />
+    <link rel="stylesheet" href="asset/style/cover.css" />
+    <link rel="stylesheet" href="asset/style/countdown.css" />
+    <link rel="stylesheet" href="asset/style/welcome.css" />
+    <link rel="stylesheet" href="asset/style/rsvp.css" />
+    <link rel="stylesheet" href="asset/style/schedule.css" />
+    <link rel="stylesheet" href="asset/style/cards.css" />
+  </head>
 
-<body class="gradient-clip">
+  <body class="gradient-clip">
     <div class="container">
-        <section id="cover">
-            <img src="asset/image/cover.jpg" alt="Cover">
-            <div class="title">
-                <h1 class="gradient-clip">Katie andJoe</h1>
-                <p class="gradient-clip">LA Girl Marries Midwest Boy</p>
+      <section id="cover">
+        <img src="asset/image/cover.jpg" alt="Cover" />
+        <div class="title">
+          <h1 class="gradient-clip">Katie andJoe</h1>
+          <p class="gradient-clip">LA Girl Marries Midwest Boy</p>
+        </div>
+        <div id="countdown" class="hidden">
+          <span class="digit gradient-clip" day="0">&nbsp;</span>
+          <span class="digit gradient-clip" day="1">&nbsp;</span>
+          <span class="digit gradient-clip" day="2">&nbsp;</span>
+          <span class="sep">Days</span>
+          <span class="digit gradient-clip" hour="0">&nbsp;</span>
+          <span class="digit gradient-clip" hour="1">&nbsp;</span>
+          <span class="sep">Hours</span>
+          <div class="flex-break"></div>
+          <span class="digit gradient-clip" min="0">&nbsp;</span>
+          <span class="digit gradient-clip" min="1">&nbsp;</span>
+          <span class="sep">Minutes</span>
+          <span class="digit gradient-clip" sec="0">&nbsp;</span>
+          <span class="digit gradient-clip" sec="1">&nbsp;</span>
+          <span class="sep">Seconds</span>
+        </div>
+      </section>
+      <section id="welcome">
+        <div class="background gradient-clip">
+          <div class="inset">
+            <div>
+              <h1>La Jolla, California</h1>
+              <h2>Saturday, May 17, 2025</h2>
             </div>
-            <div id="countdown" class="hidden">
-                <span class="digit gradient-clip" day="0">&nbsp;</span>
-                <span class="digit gradient-clip" day="1">&nbsp;</span>
-                <span class="digit gradient-clip" day="2">&nbsp;</span>
-                <span class="sep">Days</span>
-                <span class="digit gradient-clip" hour="0">&nbsp;</span>
-                <span class="digit gradient-clip" hour="1">&nbsp;</span>
-                <span class="sep">Hours</span>
-                <div class="flex-break"></div>
-                <span class="digit gradient-clip" min="0">&nbsp;</span>
-                <span class="digit gradient-clip" min="1">&nbsp;</span>
-                <span class="sep">Minutes</span>
-                <span class="digit gradient-clip" sec="0">&nbsp;</span>
-                <span class="digit gradient-clip" sec="1">&nbsp;</span>
-                <span class="sep">Seconds</span>
-            </div>
-        </section>
-        <section id="welcome">
-            <div class="background gradient-clip">
-                <div class="inset">
-                    <div>
-                        <h1>La Jolla, California</h1>
-                        <h2>Saturday, May 17, 2025</h2>
-                    </div>
-                    <a id="rsvp" class="gradient-clip" href="https://withjoy.com/joe-and-katie-may-25/rsvp" target="_blank">
-                        <span>
-                            <span class="gradient-clip"> RSVP </span>
-                        </span>
-                    </a>
-                    <p> Our love story began in Seattle in the summer of 2018 when Katie, a bright-eyed intern, joined my team. It didn’t take long to realize there was more than just workplace synergy between us. After Katie returned to
-                        college and later moved to San Francisco for work, it seemed like we might never reconnect. But in 2020, with the pandemic and remote work changing everything, Katie made the bold decision to move to Seattle to be
-                        with me. Since then, we’ve survived the pandemic, gotten a puppy, traveled to new places, and moved to Houston. Now, we’re excited to start the next chapter of our lives together! </p>
-                    <a class="next" href="#info">View Event Details and More</a>
-                </div>
-            </div>
-        </section>
-        <section id="info">
-            <h1>Event Schedule</h1>
-            <div id="schedule">
-                <div class="time gradient-clip">4:00</div>
-                <div class="block gradient-clip">
-                    <h2>Ceremony</h2>
-                    <p><a
-                            href="https://www.google.com/maps/place/The+Wedding+Bowl/@32.8441643,-117.2817798,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03435d0ba36d:0x51bd66d95ca99684!8m2!3d32.8441598!4d-117.2792049!16s%2Fg%2F11n7n8jjc_?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">The
-                            Wedding Bowl / Cuvier Park</a></p>
-                </div>
-                <div class="time gradient-clip">4:30</div>
-                <div class="block gradient-clip">
-                    <h2>Cocktail Hour</h2>
-                    <p><a
-                            href="https://www.google.com/maps/place/Cuvier+Club+by+Wedgewood+Weddings/@32.8441955,-117.2792809,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03e52a93be8f:0x61b40b925e731938!8m2!3d32.844191!4d-117.276706!16s%2Fg%2F1vtzhhtk?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Cuvier
-                            Club (5 minute walk)</a></p>
-                </div>
-                <div class="time gradient-clip">5:30</div>
-                <div class="block gradient-clip">
-                    <h2>Dinner, Music, Open Bar</h2>
-                </div>
-                <div class="time gradient-clip">10:00</div>
-            </div>
-            <h1>Island Cocktail Attire</h1>
-            <p> Please attend wearing cocktail attire. Bright and patterned styles are encoraged. Men should wear a suit or dress shirt. Women should wear a cocktail dress or dressy seperates. We recommend a jacket for the evenings this
-                time of year. </p>
-            <h1>Accomodations</h1>
-            <p> We have 2 room blocks available for our guests. One is near the venue in beautiful sea-side La Jolla. The second is in downtown San Diego (25 minutes by car) for those who are looking to spend more time in the city proper.
+            <a
+              id="rsvp"
+              class="gradient-clip"
+              href="https://withjoy.com/joe-and-katie-may-25/rsvp"
+              target="_blank"
+            >
+              <span>
+                <span class="gradient-clip"> RSVP </span>
+              </span>
+            </a>
+            <p>
+              Our love story began in the summer of 2018 when Katie, a
+              bright-eyed intern, joined Joe's team. There turned out to be more
+              than just workplace synergy between them. After Katie's returned
+              to college and later move to San Francisco for work, it seemed
+              like they might never reconnect. But in 2020, Katie made the bold
+              move to Seattle to be with Joe. Since then, they’ve tavelled the
+              world, gotten a puppy, and moved to Houston. Now, they’re excited
+              to start the next chapter of their lives together!
             </p>
-            <h2>The Empress</h2>
-            <p> The Empress is walking distance to the venue and La Jolla's downtown and cove. Follow <a href="https://be.synxis.com/?Hotel=12143&Chain=20678&group=KATIEJOE25&arrive=05-16-2025" target="_blank">this link</a> and book before
-                April 16th for the group rate. Please note that if you want to extend your stay beyond the 16th and 17th, with the group rate, you can book two nights and then call to extend your stay.</p>
-            <h2>The Westin</h2>
-            <p>The Westin is in downtown San Diego, which is 25 minutes from La Jolla. There is limited parking at the venue, so please consider taking a cab to the ceremony. Follow <a
-                    href="https://book.passkey.com/go/LuangkoteDaileyWedding">this link</a> and book before April 18th for the group rate.</p>
-            <h1>Travel Recommendations</h1>
-            <p> The closest airport is San Diego International Airport (SAN) about 14 miles from the venue. LAX is the next closest large airport, but is 2 hours away by car. Traffic between L.A. and San Diego is notoriously heavy. </p>
-            <p> For transportation during your stay, we recommend Uber/Lyft or renting a car. However, the venue has extremely limited street parking, so whichever option you choose, we recommend that you Uber/Lyft or walk to the event
-                itself. </p>
-            <h1>Registry</h1>
-            <p> In place of a traditional gift registry, we would be honored to receive red envelopes. These are known as “红包“ (“hong bao”) in Chinese culture. These envelopes, which typically contain money, are a meaningful tradition that
-                symbolize good fortune. If you still want to give a gift, we have <a href="https://venmo.com/u/Joe-Dailey-1" target="_blank">Venmo</a> and <a href="https://withjoy.com/joe-and-katie-may-25/registry" target="_blank">a small
-                    registry</a>.</p>
-            <h1>Frequently Asked Questions</h1>
-            <h2>Can I bring my children?</h2>
-            <p> Unfortunately, we can only accommodate the children of immediate family members. We hope that you will understand this decision and that you will still be able to join us on our special day. </p>
-            <h2>What time should I arrive?</h2>
-            <p> The ceremony is at 4pm. Please give yourself time to park and find the ceremony site. Traffic can be difficult in the San Diego. </p>
-            <h2>Is there Parking?</h2>
-            <p> There is limited street parking at the venue. We encourage you to take a cab or walk if possible. </p>
-            <h2>What will the weather be like?</h2>
-            <p> The ceremony is planned for outside and dining is inside. The average temperature of La Jolla in May is 70°F, but the temperature drops after sunset. </p>
-            <a class="next" href="#game">Open a New Deck</a>
-        </section>
-        <section id="game">
-            <div class="board">
-                <div id="deck">
-                    <!-- Hello Jonah, Hello Andrew -->
-                    <div class="base empty"></div>
-                </div>
-            </div>
-        </section>
+            <a class="next" href="#info">View Event Details and More</a>
+          </div>
+        </div>
+      </section>
+      <section id="info">
+        <h1>Event Schedule</h1>
+        <div id="schedule">
+          <div class="time gradient-clip">4:00</div>
+          <div class="block gradient-clip">
+            <h2>Ceremony</h2>
+            <p>
+              <a
+                href="https://www.google.com/maps/place/The+Wedding+Bowl/@32.8441643,-117.2817798,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03435d0ba36d:0x51bd66d95ca99684!8m2!3d32.8441598!4d-117.2792049!16s%2Fg%2F11n7n8jjc_?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
+                >The Wedding Bowl / Cuvier Park</a
+              >
+            </p>
+          </div>
+          <div class="time gradient-clip">4:30</div>
+          <div class="block gradient-clip">
+            <h2>Cocktail Hour</h2>
+            <p>
+              <a
+                href="https://www.google.com/maps/place/Cuvier+Club+by+Wedgewood+Weddings/@32.8441955,-117.2792809,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc03e52a93be8f:0x61b40b925e731938!8m2!3d32.844191!4d-117.276706!16s%2Fg%2F1vtzhhtk?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
+                >Cuvier Club (5 minute walk)</a
+              >
+            </p>
+          </div>
+          <div class="time gradient-clip">5:30</div>
+          <div class="block gradient-clip">
+            <h2>Dinner, Music, Open Bar</h2>
+          </div>
+          <div class="time gradient-clip">10:00</div>
+        </div>
+        <h1>Island Cocktail Attire</h1>
+        <p>
+          Please attend wearing cocktail attire. Bright and patterned styles are
+          encoraged. Men should wear a suit or dress shirt. Women should wear a
+          cocktail dress or dressy seperates. We recommend a jacket for the
+          evenings this time of year.
+        </p>
+        <h1>Accomodations</h1>
+        <p>
+          We have 2 room blocks available for our guests. One is near the venue
+          in beautiful sea-side La Jolla. The second is in downtown San Diego
+          (25 minutes by car) for those who are looking to spend more time in
+          the city proper.
+        </p>
+        <h2>The Empress</h2>
+        <p>
+          The Empress is walking distance to the venue and La Jolla's downtown
+          and cove. Follow
+          <a
+            href="https://be.synxis.com/?Hotel=12143&Chain=20678&group=KATIEJOE25&arrive=05-16-2025"
+            target="_blank"
+            >this link</a
+          >
+          and book before April 16th for the group rate. Please note that if you
+          want to extend your stay beyond the 16th and 17th, with the group
+          rate, you can book two nights and then call to extend your stay.
+        </p>
+        <h2>The Westin</h2>
+        <p>
+          The Westin is in downtown San Diego, which is 25 minutes from La
+          Jolla. There is limited parking at the venue, so please consider
+          taking a cab to the ceremony. Follow
+          <a href="https://book.passkey.com/go/LuangkoteDaileyWedding"
+            >this link</a
+          >
+          and book before April 18th for the group rate.
+        </p>
+        <h1>Travel Recommendations</h1>
+        <p>
+          The closest airport is San Diego International Airport (SAN) about 14
+          miles from the venue. LAX is the next closest large airport, but is 2
+          hours away by car. Traffic between L.A. and San Diego is notoriously
+          heavy.
+        </p>
+        <p>
+          For transportation during your stay, we recommend Uber/Lyft or renting
+          a car. However, the venue has extremely limited street parking, so
+          whichever option you choose, we recommend that you Uber/Lyft or walk
+          to the event itself.
+        </p>
+        <h1>Registry</h1>
+        <p>
+          In place of a traditional gift registry, we would be honored to
+          receive red envelopes. These are known as “红包“ (“hong bao”) in
+          Chinese culture. These envelopes, which typically contain money, are a
+          meaningful tradition that symbolize good fortune. If you still want to
+          give a gift, we have
+          <a href="https://venmo.com/u/Joe-Dailey-1" target="_blank">Venmo</a>
+          and
+          <a
+            href="https://withjoy.com/joe-and-katie-may-25/registry"
+            target="_blank"
+            >a small registry</a
+          >.
+        </p>
+        <h1>Frequently Asked Questions</h1>
+        <h2>Can I bring my children?</h2>
+        <p>
+          Unfortunately, we can only accommodate the children of immediate
+          family members. We hope that you will understand this decision and
+          that you will still be able to join us on our special day.
+        </p>
+        <h2>What time should I arrive?</h2>
+        <p>
+          The ceremony is at 4pm. Please give yourself time to park and find the
+          ceremony site. Traffic can be difficult in the San Diego.
+        </p>
+        <h2>Is there Parking?</h2>
+        <p>
+          There is limited street parking at the venue. We encourage you to take
+          a cab or walk if possible.
+        </p>
+        <h2>What will the weather be like?</h2>
+        <p>
+          The ceremony is planned for outside and dining is inside. The average
+          temperature of La Jolla in May is 70°F, but the temperature drops
+          after sunset.
+        </p>
+        <a class="next" href="#game">Open a New Deck</a>
+      </section>
+      <section id="game">
+        <div class="board">
+          <div id="deck">
+            <!-- Hello Jonah, Hello Andrew -->
+            <div class="base empty"></div>
+          </div>
+        </div>
+      </section>
     </div>
-</body>
-<script src="asset/script/cover.js"></script>
-<script src="asset/script/countdown.js"></script>
-<script src="asset/script/cards.js"></script>
-
+  </body>
+  <script src="asset/script/cover.js"></script>
+  <script src="asset/script/countdown.js"></script>
+  <script src="asset/script/cards.js"></script>
 </html>

@@ -1,307 +1,307 @@
 :root {
-    --card-width: 50%;
-    --stacked-top: 5%;
-    --stacked-left: calc(50% - 25%);
+  --card-width: 50%;
+  --stacked-top: 5%;
+  --stacked-left: calc(50% - 25%);
 
-    --held-top: calc(30%);
-    --held-left: calc(50% - 25%);
+  --held-top: calc(30%);
+  --held-left: calc(50% - 25%);
 
-    --discard-top: 60%;
-    --discard-left: 25%;
+  --discard-top: 60%;
+  --discard-left: 25%;
 }
 
 #game {
-    background: none;
-    margin: 0;
-    padding: 0;
+  background: none;
+  margin: 0;
+  padding: 0;
 }
 
 #board {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 #deck {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    position: relative;
-    perspective: 1000px;
-    display: block;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: relative;
+  perspective: 1000px;
+  display: block;
+  overflow: hidden;
 }
 
 .pack {
-    position: absolute;
-    left: calc(var(--stacked-left) - 3px);
-    top: calc(var(--stacked-top) - 3px);
-    width: var(--card-width);
-    aspect-ratio: 1085 / 1573;
-    transform-style: preserve-3d;
-    cursor: pointer;
-    perspective: 1000px;
-    animation-fill-mode: forwards;
-    transition: left .6s, top .6s;
-    transform: translate3d(0, 0, 0);
+  position: absolute;
+  left: calc(var(--stacked-left) - 3px);
+  top: calc(var(--stacked-top) - 3px);
+  width: var(--card-width);
+  aspect-ratio: 1085 / 1573;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  perspective: 1000px;
+  animation-fill-mode: forwards;
+  transition: left 0.6s, top 0.6s;
+  transform: translate3d(0, 0, 0);
 }
 
 .pack[state="spawned"] {
-    left: -1000px;
+  left: -1000px;
 }
 
-.pack>img {
-    filter: drop-shadow(0px 0px 20px #44444d81);
-    transform: translate3d(0, 0, 0);
+.pack > img {
+  filter: drop-shadow(0px 0px 20px #44444d81);
+  transform: translate3d(0, 0, 0);
 }
 
 .pack.start {
-    top: 30%;
-    left: calc(50% - var(--card-width) / 2);
+  top: 30%;
+  left: calc(50% - var(--card-width) / 2);
 }
 
 .pack[state="unwrapped"] {
-    top: 2000px
+  top: 2000px;
 }
 
-.pack>svg {
-    position: absolute;
-    top: 45%;
-    left: 0;
-    line-height: 0;
-    text-align: center;
-    width: 100%;
-    margin: 0;
+.pack > svg {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  line-height: 0;
+  text-align: center;
+  width: 100%;
+  margin: 0;
 }
 
-.pack>svg>text {
-    color: "var(--corn)"
+.pack > svg > text {
+  color: "var(--corn)";
 }
 
-.pack.start>svg {
-    animation: pulse 2s infinite;
+.pack.start > svg {
+  animation: pulse 2s infinite;
 }
 
 .pack .glimmer {
-    mask-image: url("/asset/cards/pack-1.png");
-    mask-size: contain;
-    border-radius: 0;
-    /* idk */
-    height: calc(100% - 4px);
+  mask-image: url("/asset/cards/pack-1.png");
+  mask-size: contain;
+  border-radius: 0;
+  /* idk */
+  height: calc(100% - 4px);
 }
 
 @keyframes pulse {
-    0% {
-        transform: translateZ(0);
-    }
+  0% {
+    transform: translateZ(0);
+  }
 
-    50% {
-        transform: translateZ(30px);
-    }
+  50% {
+    transform: translateZ(30px);
+  }
 
-    100% {
-        transform: translateZ(0);
-    }
+  100% {
+    transform: translateZ(0);
+  }
 }
 
 .base {
-    position: absolute;
-    left: calc(var(--stacked-left) - 3px);
-    top: calc(var(--stacked-top) - 3px);
-    width: var(--card-width);
-    aspect-ratio: 5 / 7;
-    background: cornsilk;
-    border-radius: 5%;
-    position: absolute;
-    box-shadow: inset 0px 0px 3px 2px #44444d81;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
+  position: absolute;
+  left: calc(var(--stacked-left) - 3px);
+  top: calc(var(--stacked-top) - 3px);
+  width: var(--card-width);
+  aspect-ratio: 5 / 7;
+  background: cornsilk;
+  border-radius: 5%;
+  position: absolute;
+  box-shadow: inset 0px 0px 3px 2px #44444d81;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
 }
 
 .base h2 {
-    padding: 4px 8px;
-    border: solid 2px var(--corn);
-    /* background: var(--corn); */
-    background-clip: text;
-    color: transparent;
+  padding: 4px 8px;
+  border: solid 2px var(--corn);
+  /* background: var(--corn); */
+  background-clip: text;
+  color: transparent;
 }
 
 .base p {
-    color: var(--corn);
+  color: var(--corn);
 }
 
 .base.empty {
-    background: none;
-    box-shadow: none;
+  background: none;
+  box-shadow: none;
 }
 
 @keyframes stacked {
-    0% {
-        left: -2000%;
-        top: 00%;
-        transform: rotateZ(-30deg);
-    }
+  0% {
+    left: -2000%;
+    top: 00%;
+    transform: rotateZ(-30deg);
+  }
 
-    80% {
-        top: calc(var(--stacked-top) + 2%);
-        left: calc(var(--stacked-left + 10%));
-        transform: rotateZ(20deg);
-    }
+  80% {
+    top: calc(var(--stacked-top) + 2%);
+    left: calc(var(--stacked-left + 10%));
+    transform: rotateZ(20deg);
+  }
 
-    90% {
-        top: calc(var(--stacked-top) + 1%);
-        left: calc(var(--stacked-left - 3%));
-        transform: rotateZ(0deg);
-    }
+  90% {
+    top: calc(var(--stacked-top) + 1%);
+    left: calc(var(--stacked-left - 3%));
+    transform: rotateZ(0deg);
+  }
 
-    100% {
-        top: var(--stacked-top);
-        left: var(--stacked-left);
-        transform: rotateZ(0deg);
-    }
+  100% {
+    top: var(--stacked-top);
+    left: var(--stacked-left);
+    transform: rotateZ(0deg);
+  }
 }
 
 @keyframes held {
-    0% {
-        top: var(--held-top);
-        left: calc(var(--held-left - 35%));
-        transform: rotateY(0deg);
-    }
+  0% {
+    top: var(--held-top);
+    left: calc(var(--held-left - 35%));
+    transform: rotateY(0deg);
+  }
 
-    10% {
-        top: calc(var(--held-top) + 10%);
-        left: calc(var(--held-left - 35%));
-        transform: scale(1.3) rotateZ(-10deg) rotateY(0deg);
-    }
+  10% {
+    top: calc(var(--held-top) + 10%);
+    left: calc(var(--held-left - 35%));
+    transform: scale(1.3) rotateZ(-10deg) rotateY(0deg);
+  }
 
-    100% {
-        top: var(--held-top);
-        left: var(--held-left);
-        transform: scale(1.3) rotateY(180deg);
-    }
+  100% {
+    top: var(--held-top);
+    left: var(--held-left);
+    transform: scale(1.3) rotateY(180deg);
+  }
 }
 
 .card[state="held"] {
-    animation-name: held;
-    animation-duration: .6s;
-    box-shadow: 0px 0px 20px #44444d81;
+  animation-name: held;
+  animation-duration: 0.6s;
+  box-shadow: 0px 0px 20px #44444d81;
 }
 
 .card[state="holding"] {
-    top: var(--held-top);
-    left: var(--held-left);
-    animation-name: unset;
-    animation-duration: unset;
-    box-shadow: 0px 0px 20px #44444d81;
-    transform: scale(1.3) rotateX(0deg) rotateY(180deg);
-    transition: transform 0.2s linear;
+  top: var(--held-top);
+  left: var(--held-left);
+  animation-name: unset;
+  animation-duration: unset;
+  box-shadow: 0px 0px 20px #44444d81;
+  transform: scale(1.3) rotateX(0deg) rotateY(180deg);
+  transition: transform 0.2s linear;
 }
 
 .card[state="discarded"] {
-    animation-name: discarded;
-    animation-duration: .2s;
-    box-shadow: 1px 1px 5px #44444d81;
+  animation-name: discarded;
+  animation-duration: 0.2s;
+  box-shadow: 1px 1px 5px #44444d81;
 }
 
 .card {
-    animation: stacked;
-    animation-duration: 1s;
-    position: absolute;
-    top: var(--stacked-top);
-    left: var(--stacked-left);
-    width: var(--card-width);
-    aspect-ratio: 5 / 7;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-    animation-fill-mode: forwards;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 5%;
+  animation: stacked;
+  animation-duration: 1s;
+  position: absolute;
+  top: var(--stacked-top);
+  left: var(--stacked-left);
+  width: var(--card-width);
+  aspect-ratio: 5 / 7;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  animation-fill-mode: forwards;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 5%;
 }
 
 .card[state="holding"] .glimmer {
-    visibility: visible;
+  visibility: visible;
 }
 
 .glimmer {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* scale(5%, 1.3) because this is shown only whole holding*/
-    border-radius: 3.5%;
-    opacity: 0.0;
-    transition: opacity 2s linear;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* scale(5%, 1.3) because this is shown only whole holding*/
+  border-radius: 3.5%;
+  opacity: 0;
+  transition: opacity 2s linear;
 }
 
 div[state="holding"] .glimmer {
-    visibility: visible;
+  visibility: visible;
 }
 
 .card-front,
 .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
 
-.pack>img,
-.card-front>img,
-.card-back>img {
-    width: 100%;
-    height: 100%;
+.pack > img,
+.card-front > img,
+.card-back > img {
+  width: 100%;
+  height: 100%;
 }
 
 .card-front {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.card-back {}
+.card-back {
+}
 
 .board {
-    height: 100vh;
-    width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
 
 @media screen and (min-width: 800px) {
-    :root {
-        --card-width: 26%;
-        --stacked-top: 20%;
-        --stacked-left: 5%;
+  :root {
+    --card-width: 26%;
+    --stacked-top: 20%;
+    --stacked-left: 5%;
 
-        --held-top: 20%;
-        --held-left: 40%;
+    --held-top: 20%;
+    --held-left: 40%;
 
-        --discard-top: 20%;
-        --discard-left: 60%;
-    }
+    --discard-top: 20%;
+    --discard-left: 60%;
+  }
 
-    .pack[state="unwrapped"] {
-        top: 2000px
-    }
+  .pack[state="unwrapped"] {
+    top: 2000px;
+  }
 }
 
-
 @media screen and (min-width: 1200px) {
-    .board {
-        left: 0;
-        height: 100vh;
-        width: 61.8vw;
-        position: sticky;
-        top: 0;
-        padding-top: minmax(25%, 15em);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  .board {
+    left: 0;
+    height: 100vh;
+    width: 61.8vw;
+    position: sticky;
+    top: 0;
+    padding-top: minmax(25%, 15em);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    #deck {
-        max-width: 1200px;
-    }
+  #deck {
+    max-width: 1200px;
+  }
 }
