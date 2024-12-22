@@ -300,8 +300,13 @@ div[state="holding"] .glimmer {
     flex-direction: column;
     align-items: center;
   }
+}
 
+@media screen and (min-width: 3000px) {
+  .board {
+    padding-top: 10%;
+  }
   #deck {
-    /* max-width: 1200px; ultrawide? */
+    max-width: 1200px;
   }
 }
