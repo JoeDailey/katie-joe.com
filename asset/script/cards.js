@@ -243,3 +243,24 @@ function createDiscardStyles() {
   }
   document.head.appendChild(style);
 }
+
+// Preload (and hold) all the images because they do not
+// start (or stay) part of the DOM before and while opening packs.
+const images = [];
+setTimeout(() => {
+  function img(src) {
+    const image = new Image();
+    image.onerror = console.error;
+    image.src = src;
+    return image;
+  }
+
+  images.push(img(`asset/cards/pack-1.png`));
+  images.push(img(`asset/cards/pack-2.png`));
+  images.push(img(`asset/cards/back-destination.png`));
+  images.push(img(`asset/cards/back-moment.png`));
+  images.push(img(`asset/cards/back-wildcard.png`));
+  for (var i = 1; i <= 18; i++) {
+    images.push(img(`asset/cards/face-${i}.png`));
+  }
+}, 500);
