@@ -83,6 +83,8 @@ section a {
   background-attachment: fixed;
   background-size: var(--bg-size);
   background-image: var(--bg-gradient);
+  /* transparent color (for background clip) breaks the underline */
+  border-bottom: solid 2px var(--teal);
 }
 
 .next {
