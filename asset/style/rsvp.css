@@ -13,6 +13,10 @@
   color: unset;
 }
 
+#rsvp::after {
+  content: none;
+}
+
 #rsvp > span {
   background: var(--corn);
   padding: 0 0.2em 0 0.4em;
