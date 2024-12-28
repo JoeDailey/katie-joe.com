@@ -77,14 +77,26 @@ section p {
 }
 
 section a {
+  position: relative;
   font-family: inherit;
   color: transparent;
   background-clip: text;
   background-attachment: fixed;
   background-size: var(--bg-size);
   background-image: var(--bg-gradient);
-  /* transparent color (for background clip) breaks the underline */
-  border-bottom: solid 2px var(--teal);
+}
+
+section a:after {
+  content: "";
+  position: absolute;
+  bottom: 0.15em;
+  left: 0;
+  width: 0;
+  height: 1px;
+  width: 100%;
+  background-attachment: fixed;
+  background-size: var(--bg-size);
+  background-image: var(--bg-gradient);
 }
 
 .next {
@@ -100,6 +112,7 @@ section a {
   background-size: var(--bg-size);
   background-image: var(--bg-gradient);
   color: transparent;
+  border: none;
 }
 
 .next::after {
