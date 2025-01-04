@@ -56,22 +56,21 @@ function spawnPack(phase) {
 function openPack() {
   cards().forEach((c) => now(c, "discarded"));
 
+  const allowWildcard = seen.size >= 17;
+  const upperLimit = allowWildcard ? 18 : 17;
+
   const seenCards = {};
-  // index is the paint order not open order so its reversed
   for (i = 0; i < 12; i++) {
-    const id = Math.floor(Math.random() * 18) + 1;
+    const id = Math.floor(Math.random() * upperLimit) + 1;
+    // index is the paint order (not open order) so its reversed
     if (id === 18 && i > 11) {
+      // sic
       --i; // No wildcard early
       continue;
     }
 
-    if (id === 18 && id !== 1 && Math.random() > 0.5) {
-      --i; // wildcard 1.4% chance except for last card
-      continue;
-    }
-
     const numOfId = seenCards[id] ?? 0;
-    if (numOfId >= 3) {
+    if (numOfId >= 2 || (id === 18 && numOfId >= 1)) {
       --i; // not too many of each
       continue;
     }
