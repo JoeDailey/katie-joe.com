@@ -268,23 +268,24 @@ setTimeout(() => {
 }, 500);
 
 function celebrate() {
-  document.documentElement.style.setProperty('--bg-gradient', `
+  document.documentElement.style.setProperty(
+    "--bg-gradient",
+    `
     radial-gradient(at 30% 22%, hsla(2,83%,73%,1) 0px, transparent 50%),
     radial-gradient(at 4% 95%, hsla(287,88%,67%,1) 0px, transparent 50%),
     radial-gradient(at 0% 0%, hsla(339,100%,80%,1) 0px, transparent 50%),
     radial-gradient(at 93% 13%, hsla(287,87%,67%,1) 0px, transparent 50%),
     radial-gradient(at 80% 76%, hsla(180,55%,53%,1) 0px, transparent 50%)
-  `);
+  `
+  );
 
-  const celebrate = elements => [...elements].forEach(e => e.classList.add('celebrating'));
+  const celebrate = (elements) =>
+    [...elements].forEach((e) => e.classList.add("celebrating"));
 
   celebrate([document.body]);
-  celebrate(document.querySelectorAll('section a'));
-  celebrate(document.querySelectorAll('section a:after'));
-  celebrate(document.querySelectorAll('.gradient-clip'));
-  celebrate(document.querySelectorAll('.next'));
-  celebrate(document.querySelectorAll('.next:after'));
-  [...document.getElementsByClassName('bg-clip')].forEach(
-    e => e.classList.add('celebrating')
-  );
+  celebrate(document.querySelectorAll("section a"));
+  celebrate(document.querySelectorAll("section a:after"));
+  celebrate(document.querySelectorAll(".gradient-clip"));
+  celebrate(document.querySelectorAll(".next"));
+  celebrate(document.querySelectorAll(".next:after"));
 }
