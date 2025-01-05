@@ -63,8 +63,7 @@ function openPack() {
   for (i = 0; i < 12; i++) {
     const id = Math.floor(Math.random() * upperLimit) + 1;
     // index is the paint order (not open order) so its reversed
-    if (id === 18 && i > 11) {
-      // sic
+    if (id === 18 && i > 9) {
       --i; // No wildcard early
       continue;
     }
@@ -114,6 +113,10 @@ function createCard(id, i) {
   card.addEventListener("click", handleClick.bind(card));
   card.addEventListener("mousemove", handleHover.bind(card));
   card.addEventListener("mouseleave", handleReleaseHover.bind(card));
+  if (id === 18) {
+    card.addEventListener("click", celebrate.bind(card));
+  }
+
   return card;
 }
 
@@ -263,3 +266,25 @@ setTimeout(() => {
     images.push(img(`asset/cards/face-${i}.png`));
   }
 }, 500);
+
+function celebrate() {
+  document.documentElement.style.setProperty('--bg-gradient', `
+    radial-gradient(at 30% 22%, hsla(2,83%,73%,1) 0px, transparent 50%),
+    radial-gradient(at 4% 95%, hsla(287,88%,67%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(339,100%,80%,1) 0px, transparent 50%),
+    radial-gradient(at 93% 13%, hsla(287,87%,67%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 76%, hsla(180,55%,53%,1) 0px, transparent 50%)
+  `);
+
+  const celebrate = elements => [...elements].forEach(e => e.classList.add('celebrating'));
+
+  celebrate([document.body]);
+  celebrate(document.querySelectorAll('section a'));
+  celebrate(document.querySelectorAll('section a:after'));
+  celebrate(document.querySelectorAll('.gradient-clip'));
+  celebrate(document.querySelectorAll('.next'));
+  celebrate(document.querySelectorAll('.next:after'));
+  [...document.getElementsByClassName('bg-clip')].forEach(
+    e => e.classList.add('celebrating')
+  );
+}
