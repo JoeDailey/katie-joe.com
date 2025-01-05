@@ -56,6 +56,12 @@ function spawnPack(phase) {
 function openPack() {
   cards().forEach((c) => now(c, "discarded"));
 
+  // remove discard from the bottom of the pile to free up resources
+  const discards = [...deck.querySelectorAll(".card[state=discarded]")];
+  if (discards.length > 18) {
+    discards.slice(0, 18).forEach((c) => c.remove());
+  }
+
   const allowWildcard = seen.size >= 17;
   const upperLimit = allowWildcard ? 18 : 17;
 
@@ -80,11 +86,6 @@ function openPack() {
   }
 
   setTimeout(() => base.classList.remove("empty"), 1000);
-
-  const discards = [...deck.querySelectorAll(".card[state=discarded]")];
-  if (discards.length > 32) {
-    discards.slice(0, 32).forEach((c) => c.remove());
-  }
 }
 
 function createCard(id, i) {
@@ -110,12 +111,22 @@ function createCard(id, i) {
     }deg)`;
   };
 
-  card.addEventListener("click", handleClick.bind(card));
-  card.addEventListener("mousemove", handleHover.bind(card));
-  card.addEventListener("mouseleave", handleReleaseHover.bind(card));
-  if (id === 18) {
-    card.addEventListener("click", celebrate.bind(card));
+  // record the listeners so they can be removed on discard
+  const frees = [];
+  function listen(event, fn) {
+    card.addEventListener(event, fn);
+    frees.push(() => card.removeEventListener(event, fn));
   }
+
+  listen("click", handleClick.bind(card));
+  listen("mousemove", handleHover.bind(card));
+  listen("mouseleave", handleReleaseHover.bind(card));
+  if (id === 18) {
+    listen("click", celebrate.bind(card));
+  }
+
+  // Remove event listeners once discard to free up resources
+  listen("discard", () => frees.forEach((f) => f()));
 
   return card;
 }
@@ -158,6 +169,7 @@ function now(card, state) {
         var discardI = Math.floor(10 * Math.random());
       } while (card.parentNode.lastChild.getAttribute("discard") == discardI);
       card.setAttribute("discard", discardI);
+      card.dispatchEvent(new Event("discard"));
       break;
     }
   }
@@ -169,6 +181,7 @@ function now(card, state) {
 }
 
 function handleClick(e) {
+  console.log("click");
   if (is(this, "none")) {
     now(this, "held");
     return;
