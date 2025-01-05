@@ -275,7 +275,7 @@ setTimeout(async () => {
   for (var i = 1; i <= 18; i++) {
     images.push(await download(`asset/cards/face-${i}.png`));
   }
-}, 500);
+}, 1000);
 
 function celebrate() {
   document.documentElement.style.setProperty(
