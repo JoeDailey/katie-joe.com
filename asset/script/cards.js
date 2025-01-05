@@ -249,21 +249,31 @@ function createDiscardStyles() {
 // Preload (and hold) all the images because they do not
 // start (or stay) part of the DOM before and while opening packs.
 const images = [];
-setTimeout(() => {
-  function img(src) {
-    const image = new Image();
-    image.onerror = console.error;
-    image.src = src;
-    return image;
-  }
 
-  images.push(img(`asset/cards/pack-1.png`));
-  images.push(img(`asset/cards/pack-2.png`));
-  images.push(img(`asset/cards/back-destination.png`));
-  images.push(img(`asset/cards/back-moment.png`));
-  images.push(img(`asset/cards/back-wildcard.png`));
+// Github pages seems to throttle concurrent downloads, which causes
+// some images to take many seconds to download. So this code awaits
+// each download sequentially to avoid that.
+async function download(src) {
+  const awaitable = () =>
+    new Promise((res) => {
+      const image = new Image();
+      image.onload = () => res();
+      image.onerror = (e) => {
+        console.error(e);
+        res(image);
+      };
+      image.src = src;
+    });
+  return await awaitable();
+}
+setTimeout(async () => {
+  images.push(await download(`asset/cards/pack-1.png`));
+  images.push(await download(`asset/cards/pack-2.png`));
+  images.push(await download(`asset/cards/back-destination.png`));
+  images.push(await download(`asset/cards/back-moment.png`));
+  images.push(await download(`asset/cards/back-wildcard.png`));
   for (var i = 1; i <= 18; i++) {
-    images.push(img(`asset/cards/face-${i}.png`));
+    images.push(await download(`asset/cards/face-${i}.png`));
   }
 }, 500);
 
