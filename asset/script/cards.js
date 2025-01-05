@@ -246,35 +246,39 @@ function createDiscardStyles() {
   document.head.appendChild(style);
 }
 
-// Preload (and hold) all the images because they do not
-// start (or stay) part of the DOM before and while opening packs.
-const images = [];
-
-// Github pages seems to throttle concurrent downloads, which causes
-// some images to take many seconds to download. So this code awaits
-// each download sequentially to avoid that.
-async function download(src) {
-  const awaitable = () =>
-    new Promise((res) => {
-      const image = new Image();
-      image.onload = () => res();
-      image.onerror = (e) => {
-        console.error(e);
-        res(image);
-      };
-      image.src = src;
-    });
-  return await awaitable();
-}
 setTimeout(async () => {
-  images.push(await download(`asset/cards/pack-1.png`));
-  images.push(await download(`asset/cards/pack-2.png`));
-  images.push(await download(`asset/cards/back-destination.png`));
-  images.push(await download(`asset/cards/back-moment.png`));
-  images.push(await download(`asset/cards/back-wildcard.png`));
-  for (var i = 1; i <= 18; i++) {
-    images.push(await download(`asset/cards/face-${i}.png`));
-  }
+  // Add these hidden images to the DOM early so they are download
+  // before someone starts interacting with the cards.
+  const div = document.createElement("div");
+  div.style.width = 0;
+  div.style.height = 0;
+  div.style.overflow = "hidden";
+  div.innerHTML = `
+    <img src="asset/cards/back-destination.png"></img>
+    <img src="asset/cards/back-moment.png"></img>
+    <img src="asset/cards/back-wildcard.png"></img>
+    <img src="asset/cards/face-1.png"></img>
+    <img src="asset/cards/face-10.png"></img>
+    <img src="asset/cards/face-11.png"></img>
+    <img src="asset/cards/face-12.png"></img>
+    <img src="asset/cards/face-13.png"></img>
+    <img src="asset/cards/face-14.png"></img>
+    <img src="asset/cards/face-15.png"></img>
+    <img src="asset/cards/face-16.png"></img>
+    <img src="asset/cards/face-17.png"></img>
+    <img src="asset/cards/face-18.png"></img>
+    <img src="asset/cards/face-2.png"></img>
+    <img src="asset/cards/face-3.png"></img>
+    <img src="asset/cards/face-4.png"></img>
+    <img src="asset/cards/face-5.png"></img>
+    <img src="asset/cards/face-6.png"></img>
+    <img src="asset/cards/face-7.png"></img>
+    <img src="asset/cards/face-8.png"></img>
+    <img src="asset/cards/face-9.png"></img>
+    <img src="asset/cards/pack-1.png"></img>
+    <img src="asset/cards/pack-2.png"></img>
+  `;
+  document.body.append(div);
 }, 1000);
 
 function celebrate() {
