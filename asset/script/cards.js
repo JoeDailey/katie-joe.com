@@ -7,6 +7,7 @@ const seen = new Set();
 const flipSFX = new Audio("asset/sound/card-flip.mp3");
 const shuffleSFX = new Audio("asset/sound/card-shuffle.mp3");
 const openSFX = new Audio("asset/sound/open-pack.mp3");
+const yaySFX = new Audio("asset/sound/yay.m4a");
 
 spawnPack("start");
 
@@ -306,6 +307,7 @@ setTimeout(async () => {
 }, 1000);
 
 function celebrate() {
+  yaySFX.play();
   document.documentElement.style.setProperty(
     "--bg-gradient",
     `
