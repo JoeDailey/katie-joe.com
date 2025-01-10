@@ -4,6 +4,10 @@ const deck = document.getElementById("deck");
 const base = deck.getElementsByClassName("base")[0];
 const seen = new Set();
 
+const flipSFX = new Audio("asset/sound/card-flip.mp3");
+const shuffleSFX = new Audio("asset/sound/card-shuffle.mp3");
+const openSFX = new Audio("asset/sound/open-pack.mp3");
+
 spawnPack("start");
 
 function spawnPack(phase) {
@@ -55,6 +59,7 @@ function spawnPack(phase) {
 
 function openPack() {
   cards().forEach((c) => now(c, "discarded"));
+  openSFX.play();
 
   // remove discard from the bottom of the pile to free up resources
   const discards = [...deck.querySelectorAll(".card[state=discarded]")];
@@ -89,6 +94,10 @@ function openPack() {
 }
 
 function createCard(id, i) {
+  if (i === 12) {
+    setTimeout(() => shuffleSFX.play(), 700);
+  }
+
   let type = "moment";
   if (id > 9) type = "destination";
   if (id === 18) type = "wildcard";
@@ -96,14 +105,14 @@ function createCard(id, i) {
   const card = document.createElement("div");
   card.classList.add("card");
   card.innerHTML = `
-            <div class="card-front">
-                <img src="asset/cards/face-${id}.png" />
-                <div class="glimmer"></div>
-            </div>
-            <div class="card-back">
-                <img src="asset/cards/back-${type}.png" />
-            </div>
-        `;
+      <div class="card-front">
+          <img src="asset/cards/face-${id}.png" />
+          <div class="glimmer"></div>
+      </div>
+      <div class="card-back">
+          <img src="asset/cards/back-${type}.png" />
+      </div>
+  `;
 
   card.transform = function (rX, rY) {
     card.style.transform = `scale(1.3) rotateX(${rX}deg) rotateY(${
@@ -153,6 +162,8 @@ function now(card, state) {
 
   switch (state) {
     case "held": {
+      flipSFX.playbackRate = Math.random() * 2 + 1;
+      flipSFX.play();
       cards().forEach((c) => is(c, "held", "holding") && now(c, "discarded"));
       if (cards().filter((c) => is(c, "none")).length <= 1) {
         base.classList.add("empty");
