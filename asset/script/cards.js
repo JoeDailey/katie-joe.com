@@ -163,6 +163,7 @@ function now(card, state) {
 
   switch (state) {
     case "held": {
+      flipSFX.volume = Math.random() * 0.2 + 0.2;
       flipSFX.playbackRate = Math.random() * 2 + 1;
       flipSFX.play();
       cards().forEach((c) => is(c, "held", "holding") && now(c, "discarded"));
@@ -193,7 +194,6 @@ function now(card, state) {
 }
 
 function handleClick(e) {
-  console.log("click");
   if (is(this, "none")) {
     now(this, "held");
     return;
