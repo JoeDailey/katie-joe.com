@@ -92,6 +92,7 @@ function openPack() {
   }
 
   setTimeout(() => base.classList.remove("empty"), 1000);
+  gtag("event", "open_pack");
 }
 
 function createCard(id, i) {
@@ -328,4 +329,5 @@ function celebrate() {
   celebrate(document.querySelectorAll(".gradient-clip"));
   celebrate(document.querySelectorAll(".next"));
   celebrate(document.querySelectorAll(".next:after"));
+  gtag("event", "wildcard_found");
 }
