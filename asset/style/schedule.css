@@ -8,6 +8,22 @@
   background-clip: text;
 }
 
+#schedule hr {
+  border: transparent;
+  margin-top: 4px;
+}
+
+#schedule hr:after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-attachment: fixed;
+  background-size: var(--bg-size);
+  background-image: var(--bg-gradient);
+  margin-bottom: 1px;
+}
+
 #schedule > .block {
   z-index: 0;
   display: inline-block;
