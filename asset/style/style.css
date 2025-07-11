@@ -158,9 +158,44 @@ section a {
   background-image: var(--bg-gradient);
 }
 
+section .thank-you {
+  position: relative;
+  font-family: inherit;
+  color: transparent;
+  background-clip: text;
+  background-attachment: fixed;
+  background-size: var(--bg-size);
+  background-image: var(--bg-gradient);
+}
+
+#photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section .link-out {
+  margin: 1em 0;
+  display: block;
+  width: fit-content;
+  text-align: center;
+  text-align: center;
+  font-size: 1.4em;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  background-clip: text;
+  background-attachment: fixed;
+  background-size: var(--bg-size);
+  background-image: var(--bg-gradient);
+  color: transparent;
+  border: none;
+}
+
 section a:after {
   content: "";
   position: absolute;
+  display: inline-block;
   bottom: 0.15em;
   left: 0;
   width: 0;
@@ -227,6 +262,19 @@ section a.celebrating:after {
   background-image: var(--bg-gradient);
 }
 
+#noses {
+  display: none;
+  padding: 0;
+  background-image: url("/asset/image/noses.jpg");
+  background-size: 140%;
+}
+
+#noses > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media screen and (min-width: 800px) {
   #info {
     display: block;
@@ -286,14 +334,14 @@ section a.celebrating:after {
     height: unset;
   }
 
-  #info {
+  #noses {
+    display: block;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
     columns: unset;
     scroll-margin-bottom: unset;
-    height: max-content;
   }
 
   #info .next {
